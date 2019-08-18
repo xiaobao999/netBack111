@@ -64,7 +64,6 @@ export default {
       }
     ];
     return {
-      data: JSON.parse(JSON.stringify(data)),
       data: JSON.parse(JSON.stringify(data))
     };
   },
@@ -84,7 +83,7 @@ export default {
       children.splice(index, 1);
     },
 
-    renderContent(h, { node, data, store }) {
+    renderContent(h, { node, data }) {
       return (
         <span class="custom-tree-node">
           <span>{node.label}</span>
