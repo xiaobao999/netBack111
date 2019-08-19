@@ -3,9 +3,13 @@ import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import echarts from 'echarts'
+import HttpSever from '@/http.js'
 
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(HttpSever)
 new Vue({
   router,
   render: h => h(App)
