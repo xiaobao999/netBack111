@@ -38,11 +38,11 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer" v-if="'edit'==dialogFormstate">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="cancel()">取 消</el-button>
         <el-button type="primary" @click="editatlas()">确 定</el-button>
       </div>
       <div slot="footer" class="dialog-footer" v-if="'add'==dialogFormstate">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="cancel()">取 消</el-button>
         <el-button type="primary" @click="addatlas()">创 建</el-button>
       </div>
     </el-dialog>
@@ -74,7 +74,15 @@ export default {
       dialogFormVisible: false,
       dialogFormstate: "",
       formLabelWidth: "100px",
+      data: "",
       form: {
+        id: "",
+        atlasname: "",
+        atlasfounder: "",
+        atlastime: "",
+        atlasfield: ""
+      },
+      formdata: {
         id: "",
         atlasname: "",
         atlasfounder: "",
@@ -88,12 +96,13 @@ export default {
       this.dialogFormstate = e;
       this.dialogFormVisible = true;
       if (e == "edit") {
-        let data = this.atlaslist[index];
-        this.form.id = data.id;
-        this.form.atlasfield = data.atlasfield;
-        this.form.atlasname = data.atlasname;
-        this.form.atlastime = data.atlastime;
-        this.form.atlasfounder = data.atlasfounder;
+        // this.formdata = this.atlaslist[index].assign();
+        this.formdata = JSON.parse(JSON.stringify(this.atlaslist[index]));
+        console.log(this.formdata);
+        this.form = this.atlaslist[index];
+      }
+      if (e == "add") {
+        this.form = {};
       }
     },
     datement() {
@@ -102,13 +111,20 @@ export default {
       });
     },
     editatlas() {
-      this.atlaslist.splice(this.form.id, 1, this.form);
+      let n = this.atlaslist.findIndex(item => item.id == this.form.id);
+      this.atlaslist[n] = this.form;
       this.dialogFormVisible = false;
     },
     addatlas() {
+      this.form.id = this.atlaslist.length + 1;
       this.atlaslist.push(this.form);
       this.dialogFormVisible = false;
-      this.form = {};
+    },
+    cancel() {
+      console.log(this.formdata, "formdata");
+      let n = this.atlaslist.findIndex(item => item.id == this.form.id);
+      this.atlaslist[n] = this.formdata;
+      this.dialogFormVisible = false;
     }
   }
 };
