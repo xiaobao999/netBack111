@@ -98,7 +98,7 @@ export default {
       if (e == "edit") {
         // this.formdata = this.atlaslist[index].assign();
         this.formdata = JSON.parse(JSON.stringify(this.atlaslist[index]));
-        console.log(this.formdata);
+        //console.log(this.formdata);
         this.form = this.atlaslist[index];
       }
       if (e == "add") {
@@ -121,7 +121,7 @@ export default {
       this.dialogFormVisible = false;
     },
     cancel() {
-      console.log(this.formdata, "formdata");
+      //console.log(this.formdata, "formdata");
       let n = this.atlaslist.findIndex(item => item.id == this.form.id);
       this.atlaslist[n] = this.formdata;
       this.dialogFormVisible = false;
