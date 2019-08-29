@@ -3,13 +3,14 @@
     <div class="datement_top">
       <div>图谱详细概览</div>
       <div>
-        <div>
-          <div>总条目</div>
-          <span>500</span>
+        <div style="text-align:center">
+          <span class="datement_span">总条目</span>
+          <span class="datement_span datement_number">500</span>
         </div>
-        <div>
-          <div>概念节点</div>
-          <span>1200</span>
+        <div class="datement_line"></div>
+        <div style="text-align:center">
+          <span class="datement_span">概念节点</span>
+          <span class="datement_span datement_number">1200</span>
         </div>
       </div>
     </div>
@@ -119,5 +120,19 @@ export default {
 .datement_main{
     flex: 4;
     height: 100%;
+}
+/*右上角样式*/
+.datement_span{
+  display: block;
+}
+.datement_line{
+  height:40px;
+  border: none;
+  border-left: 1px solid #d1d4d1;
+  margin:10px 10px 0;
+}
+.datement_number{
+  margin-top:5px;
+  font-size: 22px;
 }
 </style>
