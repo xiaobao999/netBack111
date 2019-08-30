@@ -339,17 +339,6 @@ export default {
                 color: "#F58158"
               }
             }
-          },
-          {
-            name: "表6",
-            value: [352, 655, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
           }
         ],
 
@@ -434,33 +423,17 @@ export default {
       };
 
       let option = {
-        // legend: {
-        //     show: true,
-        //     orient: 'vertical',
-        //     top: 'bottom',
-        //     left: 'right',
-        //     data: ['地点', '线路'],
-        //     textStyle: {
-        //         color: '#fff'
-        //     }
-        // },
         tooltip: {
           trigger: "item",
           show: true,
-          // alwaysShowContent:true,
-          // position:[185,75],
-          // formatter:'{b}的表信息，巴拉巴拉'
           formatter: function(params, ticket, callback) {
             console.log(params);
             if (params.componentSubType === "scatter") {
-              return params.name + "的表信息，巴拉巴拉~~";
-            } else if (params.componentSubType === "lines") {
-              return "从" + params.data.fromName + "到" + params.data.toName;
+              return params.name;
             }
           }
         },
         geo: {
-          map: "北京市",
           label: {
             emphasis: {
               show: false
@@ -479,7 +452,6 @@ export default {
         },
         series: [
           {
-            name: "数据库表",
             //type: 'effectScatter',
             type: "scatter",
             coordinateSystem: "geo",
@@ -528,12 +500,6 @@ export default {
             lineStyle: {
               normal: {
                 color: "green",
-                /*
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0, color: '#58B3CC'
-                        }, {
-                            offset: 1, color: '#F58158'
-                        }], false),*/
                 width: 2,
                 opacity: 0.6,
                 curveness: 0.1
@@ -558,12 +524,6 @@ export default {
             lineStyle: {
               normal: {
                 color: "red",
-                /*
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0, color: '#58B3CC'
-                        }, {
-                            offset: 1, color: '#F58158'
-                        }], false),*/
                 width: 2,
                 opacity: 1,
                 curveness: 0.2

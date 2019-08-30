@@ -1,7 +1,23 @@
 <template>
-  <div>
-    <span>刷新</span>
-    <div class="progress">
+  <div class="progress">
+    <el-button type="primary" plain>刷 新</el-button>
+    <div class="progress_main">
+      <div class="log" v-show="logshow">
+        <div class="tittle">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>详细日志</span>
+              <el-button
+                icon="el-icon-close"
+                style="float: right; padding: 5px"
+                circle
+                @click="close"
+              ></el-button>
+            </div>
+            <div v-for="o in 10" :key="o" class="text item">{{'列表内容 ' + o }}</div>
+          </el-card>
+        </div>
+      </div>
       <el-table :data="tableData" stripe style="width: 100%">
         <el-table-column prop="date" label="Task ID"></el-table-column>
         <el-table-column prop="name" label="进度条">
@@ -9,8 +25,8 @@
             <el-progress :percentage="scope.row.name"></el-progress>
           </template>
         </el-table-column>
-        <el-table-column prop="address" label="工作状态"></el-table-column>
-        <el-table-column prop="address" label="机构"></el-table-column>
+        <el-table-column prop="state" label="工作状态"></el-table-column>
+        <el-table-column prop="mechanism" label="机构"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template>
             <el-button type="text" size="small">启动</el-button>
@@ -19,38 +35,38 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="log">
-        111111
-      </div>
     </div>
   </div>
 </template>
 <script>
-import $ from "jquery";
 export default {
   data() {
     return {
-      drawer: false,
+      logshow: false,
       tableData: [
         {
-          date: "2016-05-02",
+          date: "52156321258",
           name: 30,
-          address: "上海市普陀区金沙江路 1518 弄"
+          state: "完好",
+          mechanism: "北京大学"
         },
         {
-          date: "2016-05-04",
-          name: 50,
-          address: "上海市普陀区金沙江路 1517 弄"
+          date: "52156321258",
+          name: 30,
+          state: "完好",
+          mechanism: "北京大学"
         },
         {
-          date: "2016-05-01",
-          name: 70,
-          address: "上海市普陀区金沙江路 1519 弄"
+          date: "52156321258",
+          name: 30,
+          state: "完好",
+          mechanism: "北京大学"
         },
         {
-          date: "2016-05-03",
-          name: 100,
-          address: "上海市普陀区金沙江路 1516 弄"
+          date: "52156321258",
+          name: 30,
+          state: "完好",
+          mechanism: "北京大学"
         }
       ]
     };
@@ -58,7 +74,10 @@ export default {
   methods: {
     handleClose() {},
     open() {
-      $(".log").css({ display: "block" });
+      this.logshow = true;
+    },
+    close() {
+      this.logshow = false;
     }
   }
 };
@@ -66,9 +85,23 @@ export default {
 <style scoped lang="less">
 .progress {
   display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.progress_main {
+  margin-top: 20px;
+  display: flex;
+  height: 100%;
   .log {
-    width: 500px;
-    display: none;
+    width: 400px;
+    margin-right: 10px;
+    .tittle{
+      height: 100%;
+      .el-card{
+        height: 100%;
+        box-shadow: none;
+      }
+    }
   }
 }
 </style>
