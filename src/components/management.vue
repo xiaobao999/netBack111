@@ -50,6 +50,7 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
+        border
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
@@ -143,8 +144,18 @@ export default {
   .form {
     width: 400px;
     margin-right: 10px;
+    .tittle {
+      height: 100%;
+      .form {
+        height: 100%;
+        .el-card__body {
+          height: 100%;
+        }
+      }
+    }
     .el-card {
       box-shadow: none;
+      height: 100%;
     }
   }
 }

@@ -18,7 +18,7 @@
           </el-card>
         </div>
       </div>
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table :data="tableData" stripe style="width: 100%" border>
         <el-table-column prop="date" label="Task ID"></el-table-column>
         <el-table-column prop="name" label="进度条">
           <template slot-scope="scope">

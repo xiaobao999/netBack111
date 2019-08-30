@@ -28,6 +28,10 @@
           >
             <el-button size="small" type="primary">上传文件</el-button>
           </el-upload>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button @click="close">取消</el-button>
+          </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="数据库导入">
@@ -44,6 +48,10 @@
           <el-form-item label="备注信息">
             <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.information"></el-input>
           </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button @click="close">取消</el-button>
+          </el-form-item>
         </el-form>
       </el-tab-pane>
     </el-tabs>
@@ -53,7 +61,7 @@
 <style scoped lang="less">
 .dataimport {
   width: 800px;
-  margin: 0 auto;
+  margin-left: 300px;
   .el-tabs {
     margin-top: 0;
   }
@@ -73,25 +81,11 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${
-          files.length
-        } 个文件，共选择了 ${files.length + fileList.length} 个文件`
-      );
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
-    }
+    onSubmit() {},
+    handleRemove() {},
+    handlePreview() {},
+    handleExceed() {},
+    beforeRemove() {}
   }
 };
 </script>
