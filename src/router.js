@@ -20,6 +20,7 @@ export default new Router({
     path: '/',
     name: 'home',
     component: Home,
+    redirect: '/netment',
     children: [{
       path: '/netment',
       name: 'netment',

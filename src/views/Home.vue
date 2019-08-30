@@ -10,23 +10,21 @@
         text-color="#fff"
         active-text-color="#ee6e15"
       >
-        <el-menu-item index="1">图谱管理</el-menu-item>
-        <el-submenu index="2">
+        <el-menu-item @click="datement">图谱管理</el-menu-item>
+        <!-- <el-submenu index="2">
           <template slot="title">数据空间</template>
           <el-menu-item index="2-1">选项1</el-menu-item>
           <el-menu-item index="2-2">选项2</el-menu-item>
           <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-submenu>
+        </el-submenu>-->
       </el-menu>
     </div>
     <div class="main">
       <el-menu
         :router="true"
-        default-active="1"
+        :default-active="defaultnav"
         class="left_nav"
-        @open="handleOpen"
-        @close="handleClose"
-        background-color="#017398"
+        background-color="#006586"
         text-color="#fff"
         active-text-color="#ee6e15"
       >
@@ -36,7 +34,7 @@
         </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-s-tools"></i>
             <span>数据模型管理</span>
           </template>
           <el-menu-item-group>
@@ -47,7 +45,7 @@
         </el-submenu>
         <el-submenu index="3">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-upload"></i>
             <span>文献数据管理</span>
           </template>
           <el-menu-item-group>
@@ -57,7 +55,7 @@
         </el-submenu>
         <el-submenu index="4">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-s-operation"></i>
             <span>工作流管理</span>
           </template>
           <el-menu-item-group>
@@ -77,13 +75,26 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex2: "1",
+      defaultnav: "netment"
     };
+  },
+  created() {
+    this.geturl();
   },
   methods: {
     handleSelect() {},
     handleOpen() {},
-    handleClose() {}
+    handleClose() {},
+    geturl() {
+      const URL = this.$route.path.split("/");
+      this.defaultnav = URL[1];
+    },
+    datement() {
+      this.$router.push({
+        name: "datement"
+      });
+    }
   }
 };
 </script>
