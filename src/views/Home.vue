@@ -10,6 +10,7 @@
         text-color="#fff"
         active-text-color="#ee6e15"
       >
+        <img src="../assets/navlogo.png" alt />
         <el-menu-item @click="datement">图谱管理</el-menu-item>
         <!-- <el-submenu index="2">
           <template slot="title">数据空间</template>
@@ -112,6 +113,13 @@ export default {
   .nav_top {
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    img {
+      height: 40px;
+      position: absolute;
+      left: 10px;
+      top: 8px;
+    }
   }
   .el-menu.el-menu--horizontal {
     border-bottom: none;
