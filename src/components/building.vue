@@ -1,3 +1,28 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@xiaobao999 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+ 
+1
+0 0 xiaobao999/netBack111
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Security  Insights  Settings
+netBack111/src/components/building.vue
+Fetching contributors…
+
+We found a potential security vulnerability in one of your dependencies.
+Only the owner of this repository can see this message.
+
+389 lines (384 sloc)  12.3 KB
+    
 <template>
   <div class="building">
     <div class="building_left">
@@ -28,8 +53,8 @@
           <span>概念名</span>
         </div>
         <div>
-          <span>概念名：{{}}</span>
-          <span style="margin-left:20px">描述：{{}}</span>
+          <span>概念名：{{msg}}</span>
+          <span style="margin-left:20px">描述：{{describe}}</span>
         </div>
       </div>
       <div class="building_right_content">
@@ -151,13 +176,14 @@
 </template>
 <script>
 import $ from "jquery";
-
 let id = 100;
 let tableWidth = 0;
 let tableWidthS = 0;
 export default {
   data() {
     return {
+      msg: "",
+      describe: "",
       tableData: [
         {
           date: "2016-05-02",
@@ -269,7 +295,6 @@ export default {
       }
       data.children.push(newChild);
     },
-
     remove(node, data) {
       const parent = node.parent;
       const children = parent.data.children || parent.data;
@@ -345,11 +370,11 @@ export default {
     position: relative;
   }
   .building_right {
-    border-left: 5px solid #e9f3f5;
+    //border-left: 5px solid #e9f3f5;
     .building_right_title {
       width: 100%;
       height: 100px;
-      border-bottom: 5px solid #e9f3f5;
+      //border-bottom: 5px solid #e9f3f5;
       padding-left: 10px;
       .building_right_title_Icon {
         display: inline-block;
@@ -367,7 +392,6 @@ export default {
     }
   }
 }
-
 .el-tree > div {
   padding: 5px 0;
 }
@@ -380,10 +404,11 @@ export default {
 .formRelation,
 .formAttribute {
   width: 300px;
-  border-left: 5px solid #e9f3f5;
+  // border-left: 5px solid #e9f3f5;
   height: 100%;
   position: absolute;
   right: 0px;
   top: 0px;
 }
 </style>
+

@@ -1,7 +1,16 @@
 <template>
   <div class="guration">
     <div class="mytree">
-      <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+      <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
+
+      <el-tree
+        class="filter-tree"
+        :data="data"
+        :props="defaultProps"
+        default-expand-all
+        :filter-node-method="filterNode"
+        ref="tree"
+      ></el-tree>
     </div>
     <div id="myChart"></div>
   </div>
@@ -22,61 +31,92 @@
 </style>
 <script>
 export default {
+  watch: {
+    filterText(val) {
+      this.$refs.tree.filter(val);
+    }
+  },
   data() {
     return {
+      filterText: "",
       data: [
         {
-          label: "一级 1",
+          id: 1,
+          label: "数据输入",
           children: [
             {
-              label: "二级 1-1",
-              children: [
-                {
-                  label: "三级 1-1-1"
-                }
-              ]
+              id: 4,
+              label: "手动输入"
+            },
+            {
+              id: 4,
+              label: "文件导入"
             }
           ]
         },
         {
-          label: "一级 2",
+          id: 2,
+          label: "数据输出",
           children: [
             {
-              label: "二级 2-1",
-              children: [
-                {
-                  label: "三级 2-1-1"
-                }
-              ]
-            },
-            {
-              label: "二级 2-2",
-              children: [
-                {
-                  label: "三级 2-2-1"
-                }
-              ]
+              id: 5,
+              label: "Excel导出"
             }
           ]
         },
         {
-          label: "一级 3",
+          id: 3,
+          label: "知识抽取",
           children: [
             {
-              label: "二级 3-1",
-              children: [
-                {
-                  label: "三级 3-1-1"
-                }
-              ]
+              id: 7,
+              label: "实体抽取"
             },
             {
-              label: "二级 3-2",
-              children: [
-                {
-                  label: "三级 3-2-1"
-                }
-              ]
+              id: 8,
+              label: "关系抽取"
+            }
+          ]
+        },
+        {
+          id: 4,
+          label: "知识融合",
+          children: [
+            {
+              id: 9,
+              label: "数据融合"
+            }
+          ]
+        },
+        {
+          id: 4,
+          label: "非结构化工具",
+          children: [
+            {
+              id: 9,
+              label: "Excel转JSON"
+            },
+            {
+              id: 10,
+              label: "WORD转JSON"
+            },
+            {
+              id: 10,
+              label: "HTML转JSON"
+            }
+          ]
+        },
+        {
+          id: 5,
+          label: "结构化数据工具",
+          children: [
+            {
+              id: 9,
+              label: "工具1"
+            },
+            {
+              id: 10,
+              label: "工具2"
             }
           ]
         }
@@ -91,445 +131,198 @@ export default {
     this.drawLine();
   },
   methods: {
-    handleNodeClick(data) {
-      console.log(data);
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.label.indexOf(value) !== -1;
     },
     drawLine() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
-      var allData = {
-        citys: [
+      let renderData = {
+        edges: [
           {
-            name: "数据表A",
-            value: [112, 215],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#337ab7"
-              }
-            }
+            target: "数据输入",
+            source: "手动输入"
           },
           {
-            name: "数据表B",
-            value: [112, 375, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#337ab7"
-              }
-            }
+            target: "数据输入",
+            source: "文件导入"
           },
           {
-            name: "数据表C",
-            value: [112, 535, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#337ab7"
-              }
-            }
+            target: "文件导入",
+            source: "数据输出"
           },
           {
-            name: "数据表AA",
-            value: [232, 215, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#8a33b7"
-              }
-            }
+            target: "手动输入",
+            source: "数据输出"
           },
           {
-            name: "数据表BB",
-            value: [232, 375, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#8a33b7"
-              }
-            }
+            target: "数据输出",
+            source: "Excel导出"
           },
           {
-            name: "数据表CC",
-            value: [232, 535, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#8a33b7"
-              }
-            }
+            target: "Excel导出",
+            source: "知识抽取"
           },
           {
-            name: "表a",
-            value: [492, 335, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "知识抽取",
+            source: "实体抽取"
           },
           {
-            name: "表b",
-            value: [492, 415, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "知识抽取",
+            source: "关系抽取"
           },
           {
-            name: "表c",
-            value: [492, 175, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "实体抽取",
+            source: "知识融合"
           },
           {
-            name: "表d",
-            value: [492, 255, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "关系抽取",
+            source: "知识融合"
           },
           {
-            name: "表e",
-            value: [492, 495, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "知识融合",
+            source: "数据融合"
           },
           {
-            name: "表f",
-            value: [492, 575, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#ebdf4a"
-              }
-            }
+            target: "数据融合",
+            source: "非结构化工具"
           },
           {
-            name: "子表A",
-            value: [622, 375, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "非结构化工具",
+            source: "Excel转JSON"
           },
           {
-            name: "子表B",
-            value: [712, 445, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "非结构化工具",
+            source: "WORD转JSON"
           },
           {
-            name: "子表C",
-            value: [712, 305, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "非结构化工具",
+            source: "HTML转JSON"
           },
           {
-            name: "子表D",
-            value: [622, 215, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "HTML转JSON",
+            source: "结构化数据工具"
           },
           {
-            name: "表1",
-            value: [352, 175, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "WORD转JSON",
+            source: "结构化数据工具"
           },
           {
-            name: "表2",
-            value: [352, 335, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "Excel转JSON",
+            source: "结构化数据工具"
           },
           {
-            name: "表3",
-            value: [352, 575, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "结构化数据工具",
+            source: "工具1"
           },
           {
-            name: "表3",
-            value: [352, 255, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
-          },
-          {
-            name: "表4",
-            value: [352, 415, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
-          },
-          {
-            name: "表5",
-            value: [352, 495, 4],
-            symbol: "rect",
-            symbolSize: [80, 25],
-            itemStyle: {
-              normal: {
-                color: "#F58158"
-              }
-            }
+            target: "结构化数据工具",
+            source: "工具2"
           }
         ],
-
-        moveLines: [
+        nodes: [
           {
-            fromName: "数据表A",
-            toName: "数据表AA",
-            coords: [[112, 215], [232, 215]]
+            name: "数据输入"
           },
           {
-            fromName: "数据表A",
-            toName: "数据表AA",
-            coords: [[112, 375], [232, 375]]
+            name: "手动输入"
           },
           {
-            coords: [[112, 535], [232, 535]]
+            name: "文件导入"
           },
           {
-            coords: [[352, 255], [492, 255]]
+            name: "数据输出"
           },
           {
-            coords: [[232, 375], [352, 335]]
+            name: "Excel导出"
           },
           {
-            coords: [[232, 375], [352, 415]]
+            name: "知识抽取"
           },
           {
-            coords: [[232, 535], [352, 495]]
+            name: "关系抽取"
           },
           {
-            coords: [[232, 535], [352, 575]]
+            name: "实体抽取"
           },
           {
-            coords: [[352, 335], [492, 335]]
+            name: "知识融合"
           },
           {
-            coords: [[352, 415], [492, 415]]
+            name: "数据融合"
           },
           {
-            coords: [[352, 175], [492, 175]]
+            name: "非结构化工具"
           },
           {
-            coords: [[492, 175], [622, 215]]
+            name: "Excel转JSON"
           },
           {
-            coords: [[492, 495], [622, 215]]
+            name: "WORD转JSON"
           },
           {
-            coords: [[232, 215], [352, 255]]
+            name: "HTML转JSON"
           },
           {
-            coords: [[622, 375], [712, 445]]
+            name: "结构化数据工具"
           },
           {
-            coords: [[622, 375], [712, 305]]
-          }
-        ],
-
-        newLines: [
-          {
-            coords: [[232, 215], [352, 175]]
+            name: "工具1"
           },
           {
-            coords: [[352, 495], [492, 495]]
-          },
-          {
-            coords: [[352, 575], [492, 575]]
-          },
-          {
-            coords: [[492, 335], [622, 215]]
-          },
-          {
-            coords: [[492, 415], [622, 375]]
-          },
-          {
-            coords: [[492, 255], [622, 375]]
-          },
-          {
-            coords: [[492, 575], [622, 375]]
+            name: "工具2"
           }
         ]
       };
-
       let option = {
         tooltip: {
-          trigger: "item",
-          show: true,
-          formatter: function(params, ticket, callback) {
-            console.log(params);
-            if (params.componentSubType === "scatter") {
-              return params.name;
-            }
-          }
-        },
-        geo: {
-          label: {
-            emphasis: {
-              show: false
-            }
-          },
-          roam: true,
-          itemStyle: {
-            normal: {
-              areaColor: "#323c48",
-              borderColor: "#404a59"
-            },
-            emphasis: {
-              areaColor: "#2a333d"
-            }
-          }
+          show: false
         },
         series: [
           {
-            //type: 'effectScatter',
-            type: "scatter",
-            coordinateSystem: "geo",
-            zlevel: 2,
-            rippleEffect: {
-              brushType: "stroke",
-              period: 7,
-              scale: 26
+            type: "graph",
+            layout: "force",
+            symbol:
+              "path://M19.300,3.300 L253.300,3.300 C262.136,3.300 269.300,10.463 269.300,19.300 L269.300,21.300 C269.300,30.137 262.136,37.300 253.300,37.300 L19.300,37.300 C10.463,37.300 3.300,30.137 3.300,21.300 L3.300,19.300 C3.300,10.463 10.463,3.300 19.300,3.300 Z",
+            symbolSize: [150, 30],
+            symbolRotate: 0,
+            legendHoverLink: true,
+            roam: true,
+            draggable: true,
+            hoverAnimation: true,
+            focusNodeAdjacency: true,
+            edgeSymbol: ["arrow", "arrow"],
+            edgeSymbolSize: [8, 8],
+            markPoint: {
+              symbol: "triangle",
+              symbolSize: 120
             },
+            itemStyle: {
+              normal: {
+                color: "#2d8cf0"
+              }
+            },
+            lineStyle: {
+              type: "solid",
+              opacity: 1,
+              width: 2,
+              //curveness: 0.5,
+              color: "#19be6b"
+            },
+            // 圆圈内的文字
             label: {
               normal: {
                 show: true,
-                //   position:'top',
-                formatter: "{b}",
-                color: "#000"
-              },
-              emphasis: {
-                show: true,
-                // position: 'right',
-                formatter: "{b}"
+                textStyle: {
+                  color: "#fff"
+                }
               }
             },
-            symbolSize: 2,
-            showEffectOn: "render",
-            itemStyle: {
-              normal: {
-                color: "#46bee9"
-              }
+            force: {
+              repulsion: 800
             },
-            data: allData.citys
-          },
-          {
-            name: "线路",
-            type: "lines",
-            coordinateSystem: "geo",
-            zlevel: 2,
-            large: true,
-            effect: {
-              show: true,
-              constantSpeed: 30,
-              symbol: "arrow", //ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-              symbolSize: 6,
-              trailLength: 0
-            },
-
-            lineStyle: {
-              normal: {
-                color: "green",
-                width: 2,
-                opacity: 0.6,
-                curveness: 0.1
-              }
-            },
-            data: allData.moveLines
-          },
-          {
-            name: "线路",
-            type: "lines",
-            coordinateSystem: "geo",
-            zlevel: 2,
-            large: true,
-            effect: {
-              show: true,
-              constantSpeed: 30,
-              symbol: "arrow", //ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-              symbolSize: 6,
-              trailLength: 0
-            },
-
-            lineStyle: {
-              normal: {
-                color: "red",
-                width: 2,
-                opacity: 1,
-                curveness: 0.2
-              }
-            },
-            data: allData.newLines
+            nodes: renderData.nodes,
+            edges: renderData.edges
           }
         ]
       };
