@@ -14,10 +14,13 @@
           <li>创建人:{{item.atlasfounder}}</li>
           <li>创建时间：{{item.atlastime}}</li>
           <li>所属领域：{{item.atlasfield}}</li>
+          <!-- todo visibility改一下 -->
+          <li style="visibility:hidden">{{item.id}}</li>
         </ul>
         <hr />
         <div>
-          <el-button size="mini" style="float:left">删除</el-button>
+          <!-- todo: 增加删除确认弹框 -->
+          <el-button size="mini" style="float:left" @click="delete_tp(i)">删除</el-button>
           <div style="display:inline-block;float: right;">
             <el-button size="mini" @click="eject('edit',i)">编辑</el-button>
           <el-button size="mini" type="primary" @click="datement()">图谱管理</el-button>
@@ -40,6 +43,10 @@
         <el-form-item label="所属领域：" :label-width="formLabelWidth">
           <el-input v-model="form.atlasfield" autocomplete="off"></el-input>
         </el-form-item>
+        <!-- todo visibility改一下 -->
+        <el-form-item label="id：" :label-width="formLabelWidth" style="visibility:hidden">
+          <el-input v-model="form.id" autocomplete="off" style="visibility:hidden"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer" v-if="'edit'==dialogFormstate">
         <el-button @click="cancel()">取 消</el-button>
@@ -58,22 +65,7 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      atlaslist: [
-        {
-          id: 1,
-          atlasname: "text1",
-          atlasfounder: "张三",
-          atlastime: "20109/06/14",
-          atlasfield: "昌平"
-        },
-        {
-          id: 2,
-          atlasname: "text2",
-          atlasfounder: "李四",
-          atlastime: "20109/08/01",
-          atlasfield: "东城"
-        }
-      ],
+      atlaslist: [],
       input: "",
       dialogFormVisible: false,
       dialogFormstate: "",
@@ -95,7 +87,21 @@ export default {
       }
     };
   },
+  mounted() {
+    this.loaddata();
+  },
   methods: {
+    loaddata() {
+      this.$http.get("http://localhost:53000/netment") .then((res) => {
+            var data = res.data;
+            console.log(data)
+            if(data.length > 0){this.atlaslist = data;}
+            });
+    },
+    delete_tp(index) {
+      this.$http.delete("http://localhost:53000/netment/"+this.atlaslist[index].id);
+      this.atlaslist.splice(index,1);
+    },
     eject(e, index) {
       this.dialogFormstate = e;
       this.dialogFormVisible = true;
@@ -116,11 +122,33 @@ export default {
     editatlas() {
       let n = this.atlaslist.findIndex(item => item.id == this.form.id);
       this.atlaslist[n] = this.form;
+      console.log(this.form.id)
+      this.$http.put("http://localhost:53000/netment/"+this.form.id,{
+              atlasname: this.form.atlasname,
+              atlasname: this.form.atlasname,
+              atlasfounder: this.form.atlasfounder,
+              atlastime: this.form.atlastime,
+              atlasfield: this.form.atlasfield
+						},{
+							emulateJSON:true
+						});
       this.dialogFormVisible = false;
     },
     addatlas() {
-      this.form.id = this.atlaslist.length + 1;
-      this.atlaslist.push(this.form);
+      var arr = new Array(1);
+      arr[0] = this.form;
+      var resp = this.$http.post("http://localhost:53000/netment",{
+              atlasname: this.form.atlasname,
+              atlasfounder: this.form.atlasfounder,
+              atlastime: this.form.atlastime,
+              atlasfield: this.form.atlasfield
+						},{
+							emulateJSON:true
+            }).then(function (response) {
+              arr[0].id = response.data.id;
+      });
+      // this.form.id = this.atlaslist.length + 1;
+      this.atlaslist = this.atlaslist.concat(arr);
       this.dialogFormVisible = false;
     },
     cancel() {
