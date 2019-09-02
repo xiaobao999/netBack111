@@ -1,29 +1,4 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@xiaobao999 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
- 
-1
-0 0 xiaobao999/netBack111
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Security  Insights  Settings
-netBack111/src/components/building.vue
-Fetching contributors…
-
-We found a potential security vulnerability in one of your dependencies.
-Only the owner of this repository can see this message.
-
-389 lines (384 sloc)  12.3 KB
-    
-<template>
+   <template>
   <div class="building">
     <div class="building_left">
       <el-tree
@@ -218,39 +193,15 @@ export default {
       data: [
         {
           id: 1,
-          label: "一级 1",
+          label: "text",
           children: [
             {
               id: 4,
-              label: "二级 1-1"
-            }
-          ]
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1"
+              label: "概念1"
             },
             {
-              id: 6,
-              label: "二级 2-2"
-            }
-          ]
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1"
-            },
-            {
-              id: 8,
-              label: "二级 3-2"
+              id: 4,
+              label: "概念2"
             }
           ]
         }
