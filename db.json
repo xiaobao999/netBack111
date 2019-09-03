@@ -8,1093 +8,6 @@
       "id": 1
     }
   ],
-  "paper": [
-    {
-      "title": "A Fast Learning Algorithm for Deep Belief Nets",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "abstract": "We show how to use complementary priors to eliminate the explaining-away effects that make inference difficult in densely connected belief nets that have many hidden layers. Using complementary priors, we derive a fast, greedy algorithm that can learn deep, directed belief networks one layer at a time, provided the top two layers form an undirected associative memory. The fast, greedy algorithm is used to initialize a slower learning procedure that fine-tunes the weights using a contrastive version of the wake-sleep algorithm. After fine-tuning, a network with three hidden layers forms a very good generative model of the joint distribution of handwritten digit images and their labels. This generative model gives better digit classification than the best discriminative learning algorithms. The low-dimensional manifolds on which the digits lie are modeled by long ravines in the free-energy landscape of the top-level associative memory, and it is easy to explore these ravines by using the directed connections to display what the associative memory has in mind.",
-      "publisher": [
-        "Neural Computation",
-        41
-      ],
-      "pubyear": 2006,
-      "citation": 6538,
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ],
-        [
-          "UCB",
-          33
-        ]
-      ],
-      "id": 11,
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "reference": [
-        [
-          "Training Invariant Support Vector Machines",
-          1234
-        ],
-        [
-          "On Contrastive Divergence Learning",
-          4567
-        ]
-      ],
-      "relation": [
-        [
-          "第一作者",
-          "author",
-          "Geoffrey E. Hinton",
-          1234
-        ],
-        [
-          "第一机构",
-          "affiliation",
-          "Google",
-          21234
-        ]
-      ]
-    },
-    {
-      "title": "2 Fast Learning Algorithm for Deep Belief Nets",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ]
-      ],
-      "abstract": "We show how to use complementary priors to eliminate the explaining-away effects that make inference difficult in densely connected belief nets that have many hidden layers. Using complementary priors, we derive a fast, greedy algorithm that can learn deep, directed belief networks one layer at a time, provided the top two layers form an undirected associative memory. The fast, greedy algorithm is used to initialize a slower learning procedure that fine-tunes the weights using a contrastive version of the wake-sleep algorithm. After fine-tuning, a network with three hidden layers forms a very good generative model of the joint distribution of handwritten digit images and their labels. This generative model gives better digit classification than the best discriminative learning algorithms. The low-dimensional manifolds on which the digits lie are modeled by long ravines in the free-energy landscape of the top-level associative memory, and it is easy to explore these ravines by using the directed connections to display what the associative memory has in mind.",
-      "publisher": [
-        "Neural Computation",
-        41
-      ],
-      "pubyear": 2006,
-      "citation": 6538,
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ]
-      ],
-      "id": 12,
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "reference": [
-        [
-          "Training Invariant Support Vector Machines",
-          1234
-        ],
-        [
-          "On Contrastive Divergence Learning",
-          4567
-        ]
-      ],
-      "relation": [
-        [
-          "第一作者",
-          "author",
-          "Geoffrey E. Hinton",
-          1234
-        ],
-        [
-          "第一机构",
-          "affiliation",
-          "Google",
-          21234
-        ]
-      ]
-    }
-  ],
-  "author": [
-    {
-      "name": "Geoffrey E. Hinton",
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 21,
-      "citation": 6538,
-      "papercount": 100,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作作者",
-          "author",
-          "Simon Osindero",
-          22
-        ],
-        [
-          "合作作者",
-          "author",
-          "Yee Whye Teh",
-          23
-        ],
-        [
-          "投稿于",
-          "publisher",
-          "Neural Computation",
-          41
-        ]
-      ]
-    },
-    {
-      "name": "Simon Osindero",
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 22,
-      "citation": 1111,
-      "papercount": 111,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作作者",
-          "author",
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "投稿于",
-          "publisher",
-          "Neural Computation",
-          41
-        ]
-      ]
-    },
-    {
-      "name": "Yee Whye Teh",
-      "affiliation": [
-        [
-          "UCB",
-          33
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 23,
-      "citation": 6538,
-      "papercount": 100,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作作者",
-          "author",
-          "Simon Osindero",
-          22
-        ],
-        [
-          "投稿于",
-          "publisher",
-          "Neural Computation",
-          41
-        ]
-      ]
-    }
-  ],
-  "affiliation": [
-    {
-      "fullname": "Peking University",
-      "abbrname": [
-        "PKU",
-        "PU"
-      ],
-      "location": "China",
-      "zipcode": 100000,
-      "subaff": [
-        "CITS",
-        "MS",
-        "LS"
-      ],
-      "author": [
-        [
-          "Tom",
-          1234
-        ],
-        [
-          "Bob",
-          6789
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 30,
-      "citation": 6538,
-      "papercount": 100,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作机构",
-          "affiliation",
-          "Google",
-          21234
-        ],
-        [
-          "合作机构",
-          "affiliation",
-          "MIT",
-          1234
-        ]
-      ]
-    },
-    {
-      "fullname": "Google",
-      "abbrname": [
-        "Google Inc.",
-        "GOOG"
-      ],
-      "location": "USA",
-      "zipcode": 600000,
-      "subaff": [
-        "AlphaBet",
-        "DeepMind",
-        "STR"
-      ],
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 31,
-      "citation": 6538,
-      "papercount": 100,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作机构",
-          "affiliation",
-          "Peking University",
-          30
-        ],
-        [
-          "合作机构",
-          "affiliation",
-          "MIT",
-          32
-        ]
-      ]
-    },
-    {
-      "fullname": "Massachusetts Institute of Technology",
-      "abbrname": [
-        "MIT"
-      ],
-      "location": "USA",
-      "zipcode": 610000,
-      "subaff": [
-        "MS",
-        "LS",
-        "DCS"
-      ],
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 32,
-      "citation": 6538,
-      "papercount": 100,
-      "firstauthorcount": 30,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "合作机构",
-          "affiliation",
-          "Peking University",
-          30
-        ],
-        [
-          "合作机构",
-          "affiliation",
-          "Google",
-          31
-        ]
-      ]
-    }
-  ],
-  "publisher": [
-    {
-      "name": "Neural Computation",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 41,
-      "citation": 6538,
-      "papercount": 100,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation Conf",
-          42
-        ],
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation Conf2",
-          43
-        ]
-      ]
-    },
-    {
-      "name": "Neural Computation Conf",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 42,
-      "citation": 6538,
-      "papercount": 100,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation",
-          41
-        ],
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation Conf2",
-          43
-        ]
-      ]
-    },
-    {
-      "name": "Neural Computation Conf2",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "topic": [
-        [
-          "deep learning",
-          1234
-        ],
-        [
-          "computer science",
-          2345
-        ],
-        [
-          "Neural Computation",
-          7890
-        ]
-      ],
-      "id": 43,
-      "citation": 6538,
-      "papercount": 100,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "countbytopic": [
-        [
-          "deep learning",
-          10
-        ],
-        [
-          "computer science",
-          15
-        ],
-        [
-          "Neural Computation",
-          20
-        ]
-      ],
-      "relation": [
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation",
-          41
-        ],
-        [
-          "领域相关",
-          "publisher",
-          "Neural Computation Conf",
-          42
-        ]
-      ]
-    }
-  ],
-  "topic": [
-    {
-      "fullname": "deep learning",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ],
-        [
-          "UCB",
-          33
-        ]
-      ],
-      "publisher": [
-        [
-          "Neural Computation",
-          41
-        ],
-        [
-          "Neural Computation Conf",
-          42
-        ]
-      ],
-      "parenttopic": [
-        [
-          "computer science",
-          52
-        ],
-        [
-          "Neural Computation111",
-          53
-        ]
-      ],
-      "childtopic": [
-        [
-          "deep learning222",
-          55
-        ],
-        [
-          "computer science222",
-          56
-        ],
-        [
-          "Neural Computation222",
-          57
-        ]
-      ],
-      "id": 51,
-      "citation": 6538,
-      "papercount": 100,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "relation": [
-        [
-          "领域相关",
-          "topic",
-          "Neural Learning",
-          59
-        ],
-        [
-          "领域相关",
-          "topic",
-          "Neural Computation2",
-          510
-        ]
-      ]
-    },
-    {
-      "fullname": "computer science",
-      "author": [
-        [
-          "Geoffrey E. Hinton",
-          21
-        ],
-        [
-          "Simon Osindero",
-          22
-        ],
-        [
-          "Yee Whye Teh",
-          23
-        ]
-      ],
-      "affiliation": [
-        [
-          "Google",
-          31
-        ],
-        [
-          "MIT",
-          32
-        ],
-        [
-          "UCB",
-          33
-        ]
-      ],
-      "publisher": [
-        [
-          "Neural Computation",
-          41
-        ],
-        [
-          "Neural Computation Conf",
-          42
-        ]
-      ],
-      "parenttopic": [],
-      "childtopic": [
-        [
-          "deep learning",
-          51
-        ],
-        [
-          "database",
-          58
-        ]
-      ],
-      "id": 52,
-      "citation": 6538,
-      "papercount": 100,
-      "publishercount": 10,
-      "countbyyear": [
-        [
-          2003,
-          10
-        ],
-        [
-          2004,
-          15
-        ],
-        [
-          2005,
-          20
-        ],
-        [
-          2006,
-          10
-        ]
-      ],
-      "relation": [
-        [
-          "领域相关",
-          "topic",
-          "deep learning222",
-          55
-        ],
-        [
-          "领域相关",
-          "topic",
-          "computer science222",
-          56
-        ]
-      ]
-    }
-  ],
   "tree_author": [
     {
       "index": "a",
@@ -1173,6 +86,247 @@
       "name": "Neural Computation Conf2",
       "id": 43,
       "type": "publishernode"
+    }
+  ],
+  "author1": [
+    {
+      "name": "Geoffrey E. Hinton",
+      "affiliation": [
+        [
+          "Google",
+          31
+        ],
+        [
+          "MIT",
+          32
+        ]
+      ],
+      "topic": [
+        [
+          "deep learning",
+          1234
+        ],
+        [
+          "computer science",
+          2345
+        ],
+        [
+          "Neural Computation",
+          7890
+        ]
+      ],
+      "id": 21,
+      "type": "authornode",
+      "citation": 6538,
+      "papercount": 100,
+      "firstauthorcount": 30,
+      "publishercount": 10,
+      "countbyyear": [
+        [
+          2003,
+          10
+        ],
+        [
+          2004,
+          15
+        ],
+        [
+          2005,
+          20
+        ],
+        [
+          2006,
+          10
+        ]
+      ],
+      "countbytopic": [
+        [
+          "deep learning",
+          10
+        ],
+        [
+          "computer science",
+          15
+        ],
+        [
+          "Neural Computation",
+          20
+        ]
+      ],
+      "relation": [
+        [
+          "合作作者",
+          "author",
+          "Simon Osindero",
+          22
+        ],
+        [
+          "合作作者",
+          "author",
+          "Yee Whye Teh",
+          23
+        ],
+        [
+          "投稿于",
+          "publisher",
+          "Neural Computation",
+          41
+        ]
+      ]
+    },
+    {
+      "name": "Simon Osindero",
+      "affiliation": [
+        [
+          "Google",
+          31
+        ],
+        [
+          "MIT",
+          32
+        ]
+      ],
+      "topic": [
+        [
+          "deep learning",
+          1234
+        ],
+        [
+          "computer science",
+          2345
+        ],
+        [
+          "Neural Computation",
+          7890
+        ]
+      ],
+      "id": 22,
+      "type": "authornode",
+      "citation": 1111,
+      "papercount": 111,
+      "firstauthorcount": 30,
+      "publishercount": 10,
+      "countbyyear": [
+        [
+          2003,
+          10
+        ],
+        [
+          2004,
+          15
+        ],
+        [
+          2005,
+          20
+        ],
+        [
+          2006,
+          10
+        ]
+      ],
+      "countbytopic": [
+        [
+          "deep learning",
+          10
+        ],
+        [
+          "computer science",
+          15
+        ],
+        [
+          "Neural Computation",
+          20
+        ]
+      ],
+      "relation": [
+        [
+          "合作作者",
+          "author",
+          "Geoffrey E. Hinton",
+          21
+        ],
+        [
+          "投稿于",
+          "publisher",
+          "Neural Computation",
+          41
+        ]
+      ]
+    },
+    {
+      "name": "Yee Whye Teh",
+      "affiliation": [
+        [
+          "UCB",
+          33
+        ]
+      ],
+      "topic": [
+        [
+          "deep learning",
+          1234
+        ],
+        [
+          "computer science",
+          2345
+        ],
+        [
+          "Neural Computation",
+          7890
+        ]
+      ],
+      "id": 23,
+      "type": "authornode",
+      "citation": 6538,
+      "papercount": 100,
+      "firstauthorcount": 30,
+      "publishercount": 10,
+      "countbyyear": [
+        [
+          2003,
+          10
+        ],
+        [
+          2004,
+          15
+        ],
+        [
+          2005,
+          20
+        ],
+        [
+          2006,
+          10
+        ]
+      ],
+      "countbytopic": [
+        [
+          "deep learning",
+          10
+        ],
+        [
+          "computer science",
+          15
+        ],
+        [
+          "Neural Computation",
+          20
+        ]
+      ],
+      "relation": [
+        [
+          "合作作者",
+          "author",
+          "Simon Osindero",
+          22
+        ],
+        [
+          "投稿于",
+          "publisher",
+          "Neural Computation",
+          41
+        ]
+      ]
     }
   ],
   "version": [
