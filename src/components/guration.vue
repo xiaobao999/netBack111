@@ -42,22 +42,22 @@
 }
 </style>
 <script>
-let renderData = {
-  edges: [
-    {
-      target: "导入数据",
-      source: "导出数据"
-    }
-  ],
-  nodes: [
-    {
-      name: "导入数据"
-    },
-    {
-      name: "导出数据"
-    }
-  ]
-};
+let edgesarr = [];
+let edges = [
+  {
+    target: "导入数据",
+    source: "导出数据"
+  }
+];
+let nodes = [
+  {
+    name: "导入数据"
+  },
+  {
+    name: "导出数据"
+  }
+];
+
 let option = {
   tooltip: {
     show: false
@@ -107,8 +107,8 @@ let option = {
       force: {
         repulsion: 5000
       },
-      nodes: renderData.nodes,
-      edges: renderData.edges
+      nodes: nodes,
+      edges: edges
     }
   ]
 };
@@ -179,8 +179,8 @@ export default {
   methods: {
     append(data) {
       let behavior = true;
-      for (let i = 0, l = renderData.nodes.length; i < l; i++) {
-        if (renderData.nodes[i].name == data.label) {
+      for (let i = 0, l = nodes.length; i < l; i++) {
+        if (nodes[i].name == data.label) {
           this.$message.error({
             showClose: true,
             message: "流程添加重复",
@@ -191,9 +191,48 @@ export default {
         }
       }
       if (behavior) {
-        renderData.nodes = [...renderData.nodes, { name: data.label }];
+        nodes = [...nodes, { name: data.label }];
       }
-      option.series[0].nodes = renderData.nodes;
+      edgesarr.push(data.label);
+      console.log(edgesarr);
+      function getedges(edgesarr) {
+        if (edgesarr.length == 1) {
+          edges = [
+            {
+              target: "导入数据",
+              source: edgesarr[0]
+            },
+            {
+              target: edgesarr[0],
+              source: "导出数据"
+            }
+          ];
+        } else {
+          console.log(edgesarr.length);
+          // for (let i = 0, l = edgesarr.length; i < l; i++) {
+          //   // if (i - 1 < 0) continue;
+          //   edges.push({
+          //     target: edgesarr[i],
+          //     source: edgesarr[i+1]
+          //   });
+          // }
+          edges = [
+            {
+              target: "导入数据",
+              source: edgesarr[0]
+            },
+            {
+              target: edgesarr[edgesarr.length - 1],
+              source: "导出数据"
+            }
+          ];
+        }
+        return edges;
+      }
+      getedges(edgesarr);
+      console.log(edges, 999);
+      option.series[0].nodes = nodes;
+      option.series[0].edges = edges;
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption(option);
     },
