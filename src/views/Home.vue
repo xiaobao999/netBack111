@@ -109,7 +109,7 @@ export default {
     justify-content: flex-end;
     position: relative;
     img {
-      height: 40px;
+      height: 35px;
       position: absolute;
       left: 10px;
       top: 8px;

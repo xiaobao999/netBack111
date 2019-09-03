@@ -5,6 +5,25 @@
       <el-button type="primary" size="small" class>导出</el-button>
     </div>
     <div class="version_main">
+      <el-table
+        ref="multipleTable"
+        :data="tableData"
+        border
+        style="width: 100%"
+        tooltip-effect="dark"
+      >
+        <el-table-column prop="name" label="版本名称" width="180"></el-table-column>
+        <el-table-column prop="date" label="时间" width="180"></el-table-column>
+        <el-table-column prop="person" label="创建人"></el-table-column>
+        <el-table-column prop="explain" label="版本说明"></el-table-column>
+        <el-table-column fixed="right" label="操作">
+          <template slot-scope="scope">
+            <!-- <el-button type="text" size="small">导出</el-button> -->
+            <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       <div class="version_form" v-show="formshow">
         <el-card class="box-card tittle">
           <div slot="header" class="clearfix">
@@ -37,25 +56,6 @@
           </el-form>
         </el-card>
       </div>
-      <el-table
-        ref="multipleTable"
-        :data="tableData"
-        border
-        style="width: 100%"
-        tooltip-effect="dark"
-      >
-        <el-table-column prop="name" label="版本名称" width="180"></el-table-column>
-        <el-table-column prop="date" label="时间" width="180"></el-table-column>
-        <el-table-column prop="person" label="创建人"></el-table-column>
-        <el-table-column prop="explain" label="版本说明"></el-table-column>
-        <el-table-column fixed="right" label="操作">
-          <template slot-scope="scope">
-            <!-- <el-button type="text" size="small">导出</el-button> -->
-            <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
-            <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@
     height: 100%;
     width: 400px;
     height: 100%;
-    margin-right: 10px;
+    margin-left: 10px;
   }
   .el-card {
     height: 100%;
@@ -87,15 +87,7 @@ import { setTimeout } from "timers";
 export default {
   data() {
     return {
-      tableData: [
-        {
-          id: 1,
-          name: "v-0.0.10",
-          date: "2019.9.2",
-          person: "小虎",
-          explain: "首次版本"
-        }
-      ], //
+      tableData: [], //
       form: {
         id: "",
         name: "",
@@ -137,6 +129,7 @@ export default {
             type: "success",
             message: "删除成功!"
           });
+          //tudo返回提示信息
           this.getdata();
         })
         .catch(() => {

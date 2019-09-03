@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     loaddata() {
-      this.$http.get("http://localhost:53000/netment").then(res => {
+      this.$http.get("netment").then(res => {
         var data = res.data;
         console.log(data);
         if (data.length > 0) {
@@ -101,7 +101,7 @@ export default {
     },
     delete_tp(index) {
       this.$http.delete(
-        "http://localhost:53000/netment/" + this.atlaslist[index].id
+        "netment/" + this.atlaslist[index].id
       );
       this.atlaslist.splice(index, 1);
     },
@@ -127,7 +127,7 @@ export default {
       this.atlaslist[n] = this.form;
       console.log(this.form.id);
       this.$http.put(
-        "http://localhost:53000/netment/" + this.form.id,
+        "netment/" + this.form.id,
         {
           atlasname: this.form.atlasname,
           atlasname: this.form.atlasname,
@@ -146,7 +146,7 @@ export default {
       arr[0] = this.form;
       var resp = this.$http
         .post(
-          "http://localhost:53000/netment",
+          "netment",
           {
             atlasname: this.form.atlasname,
             atlasfounder: this.form.atlasfounder,

@@ -89,7 +89,6 @@
 
 .visualization {
   display: flex;
-  width: 1400px;
   height: 100%;
   margin: 0 auto;
   > div {

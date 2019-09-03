@@ -1,18 +1,11 @@
 {
   "netment": [
     {
-      "atlasname": "111123123",
-      "atlasfounder": "123",
-      "atlastime": "123",
-      "atlasfield": "123",
+      "atlasname": "456",
+      "atlasfounder": "456",
+      "atlastime": "456",
+      "atlasfield": "456",
       "id": 1
-    },
-    {
-      "atlasname": "老王图谱萨达",
-      "atlasfounder": "老王",
-      "atlastime": "2018.12..15",
-      "atlasfield": "前端",
-      "id": 2
     }
   ],
   "paper": [
@@ -1104,10 +1097,19 @@
   ],
   "tree_author": [
     {
+      "index": "a",
+      "name": "Anil K. Jain",
+      "label": "Anil K. Jain",
+      "id": 20,
+      "type": "authornode",
+      "affiliation": "Google"
+    },
+    {
       "index": "G",
       "name": "Geoffrey E. Hinton",
       "label": "Geoffrey E. Hinton(Google)",
       "id": 21,
+      "type": "authornode",
       "affiliation": "Google"
     },
     {
@@ -1115,6 +1117,7 @@
       "name": "Simon Osindero",
       "label": "Simon Osindero(MIT)",
       "id": 22,
+      "type": "authornode",
       "affiliation": "MIT"
     },
     {
@@ -1122,6 +1125,7 @@
       "name": "Yee Whye Teh",
       "label": "Yee Whye Teh(UCB)",
       "id": 23,
+      "type": "authornode",
       "affiliation": "UCB"
     }
   ],
@@ -1130,19 +1134,22 @@
       "index": "M",
       "label": "MIT",
       "name": "MIT",
-      "id": 32
+      "id": 32,
+      "type": "affiliationnode"
     },
     {
       "index": "G",
       "label": "Google",
       "name": "Google",
-      "id": 31
+      "id": 31,
+      "type": "affiliationnode"
     },
     {
       "index": "U",
       "label": "UCB",
       "name": "UCB",
-      "id": 33
+      "id": 33,
+      "type": "affiliationnode"
     }
   ],
   "tree_publisher": [
@@ -1150,31 +1157,40 @@
       "index": "N",
       "label": "Neural Computation",
       "name": "Neural Computation",
-      "id": 41
+      "id": 41,
+      "type": "publishernode"
     },
     {
       "index": "N",
       "label": "Neural Computation Conf",
       "name": "Neural Computation Conf",
-      "id": 42
+      "id": 42,
+      "type": "publishernode"
     },
     {
       "index": "N",
       "label": "Neural Computation Conf2",
       "name": "Neural Computation Conf2",
-      "id": 43
+      "id": 43,
+      "type": "publishernode"
     }
   ],
   "version": [
     {
       "id": 1,
-      "name": "v-0.0.10",
-      "date": "2019.9.2",
-      "person": "小虎",
-      "explain": "首次版本"
+      "uid": "15513526",
+      "title": "标题564",
+      "author": "作者1",
+      "year": "2019",
+      "mechanism": "北大",
+      "keyword": "很关键",
+      "name": "v-01.110120",
+      "date": "2019.9.3456",
+      "person": "老王",
+      "explain": "创建初版"
     },
     {
-      "name": "123123",
+      "name": "1111",
       "date": "123123",
       "person": "12123",
       "explain": "123123",
@@ -1188,13 +1204,6 @@
       "id": 3
     },
     {
-      "name": "1233123213",
-      "date": "20155112",
-      "person": "13213131",
-      "explain": "1321311355",
-      "id": 4
-    },
-    {
       "name": "老王",
       "date": "12313",
       "person": "123",
@@ -1202,60 +1211,56 @@
       "id": 5
     },
     {
-      "name": "123",
-      "date": "123",
-      "person": "123",
-      "explain": "123",
-      "id": 6
-    },
-    {
-      "name": "12343453",
-      "date": "12313",
-      "person": "1231",
-      "explain": "12321",
-      "id": 7
-    },
-    {
-      "name": "789",
-      "date": "798",
-      "person": "798",
-      "explain": "798",
-      "id": 8
+      "name": "老黄",
+      "date": "132131",
+      "person": "123131",
+      "explain": "1231313",
+      "id": 13
     },
     {
       "name": "456",
       "date": "456",
       "person": "456",
-      "explain": "456",
-      "id": 9
+      "explain": "456456",
+      "id": 8
+    }
+  ],
+  "management": [
+    {
+      "id": 1,
+      "uid": "15453526",
+      "title": "标题1",
+      "author": "作者1",
+      "year": "2019",
+      "mechanism": "清华",
+      "keyword": "关键的关键"
     },
     {
-      "name": "45654",
-      "date": "45647",
-      "person": "741",
-      "explain": "147",
-      "id": 10
+      "id": 2,
+      "uid": "15453526",
+      "title": "标题2",
+      "author": "作者1",
+      "year": "2019",
+      "mechanism": "清华",
+      "keyword": "关键的关键"
     },
     {
-      "name": "123",
-      "date": "123",
-      "person": "123",
-      "explain": "123",
-      "id": 11
+      "id": 3,
+      "uid": "15453526",
+      "title": "标题3",
+      "author": "作者1",
+      "year": "2019",
+      "mechanism": "清华",
+      "keyword": "关键的关键"
     },
     {
-      "name": "12321313",
-      "date": "12313",
-      "person": "12313",
-      "explain": "13213",
-      "id": 12
-    },
-    {
-      "name": "123131",
-      "date": "132131",
-      "person": "123131",
-      "explain": "1231313",
-      "id": 13
+      "id": 4,
+      "uid": "15453526",
+      "title": "标题4",
+      "author": "作者1",
+      "year": "2019",
+      "mechanism": "清华",
+      "keyword": "关键的关键"
     }
   ]
 }

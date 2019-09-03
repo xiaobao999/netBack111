@@ -10,6 +10,7 @@ import Dataimport from './components/dataimport'
 import Visualization from './components/visualization'
 import Version from './components/version'
 import Guration from './components/guration'
+import Login from './components/login'
 
 Vue.use(Router)
 
@@ -58,5 +59,9 @@ export default new Router({
       name: 'guration',
       component: Guration
     }]
+  }, {
+    path: '/login',
+    name: 'login',
+    component: Login,
   }]
 })

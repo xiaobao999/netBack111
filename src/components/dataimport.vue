@@ -3,18 +3,6 @@
     <el-tabs>
       <el-tab-pane label="上传文件">
         <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="导入时间">
-            <el-input v-model="form.time"></el-input>
-          </el-form-item>
-          <el-form-item label="操作员">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="任务领域">
-            <el-input v-model="form.areas"></el-input>
-          </el-form-item>
-          <el-form-item label="备注信息">
-            <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.information"></el-input>
-          </el-form-item>
           <el-upload
             class="upload-demo"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -28,6 +16,18 @@
           >
             <el-button size="small" type="primary">上传文件</el-button>
           </el-upload>
+          <el-form-item label="导入时间">
+            <el-input v-model="form.time"></el-input>
+          </el-form-item>
+          <el-form-item label="操作员">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="任务领域">
+            <el-input v-model="form.areas"></el-input>
+          </el-form-item>
+          <el-form-item label="备注信息">
+            <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.information"></el-input>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">保存</el-button>
             <el-button @click="close">取消</el-button>
