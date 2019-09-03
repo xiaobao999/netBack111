@@ -69,21 +69,27 @@
 .version_main {
   margin-top: 10px;
   height: 100%;
+  width: 100%;
   display: flex;
+  .el-table {
+    flex: 4;
+    width: 100%;
+  }
   .version_form {
-    height: 100%;
-    width: 400px;
-    height: 100%;
     margin-left: 10px;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    min-width: 300px;
   }
   .el-card {
+    width: 100%;
     height: 100%;
     box-shadow: none;
   }
 }
 </style>
 <script>
-import { setTimeout } from "timers";
 export default {
   data() {
     return {
@@ -124,7 +130,7 @@ export default {
       })
         .then(async () => {
           const id = e.id;
-          const res = await this.$http.delete(`version/${id}`);
+          await this.$http.delete(`version/${id}`);
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -144,10 +150,10 @@ export default {
       let id = this.form.id;
       if (id == undefined) {
         this.form.id = this.tableData.length + 1;
-        const res = await this.$http.post(`version`, this.form);
+        await this.$http.post(`version`, this.form);
         this.getdata();
       } else {
-        const res = await this.$http.put(`version/${id}`, this.form);
+        await this.$http.put(`version/${id}`, this.form);
         this.getdata();
       }
     },

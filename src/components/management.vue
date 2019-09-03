@@ -6,6 +6,28 @@
       <el-button type="danger" @click="batchDelete">批量删除</el-button>
     </div>
     <div class="management_main">
+      <el-table
+        ref="multipleTable"
+        :data="tableData"
+        tooltip-effect="dark"
+        style="width: 100%"
+        border
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column prop="uid" label="ID" width="120"></el-table-column>
+        <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="author" label="作者" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="year" label="年份" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="mechanism" label="机构" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="keyword" label="关键词" show-overflow-tooltip></el-table-column>
+        <el-table-column fixed="right" label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       <div class="form" v-show="formshow">
         <div class="tittle">
           <el-card class="box-card">
@@ -45,28 +67,6 @@
           </el-card>
         </div>
       </div>
-      <el-table
-        ref="multipleTable"
-        :data="tableData"
-        tooltip-effect="dark"
-        style="width: 100%"
-        border
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="uid" label="ID" width="120"></el-table-column>
-        <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="author" label="作者" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="year" label="年份" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="mechanism" label="机构" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="keyword" label="关键词" show-overflow-tooltip></el-table-column>
-        <el-table-column fixed="right" label="操作">
-          <template slot-scope="scope">
-            <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
-            <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
     </div>
   </div>
 </template>
@@ -109,8 +109,7 @@ export default {
     async onSubmit() {
       this.formshow = false;
       let id = this.form.id;
-      console.log(this.form);
-      const res = await this.$http.put(`management/${id}`, this.form);
+      await this.$http.put(`management/${id}`, this.form);
       this.getdata();
     },
     deleteRow(e) {
@@ -121,7 +120,7 @@ export default {
       })
         .then(async () => {
           const id = e.id;
-          const res = await this.$http.delete(`management/${id}`);
+          await this.$http.delete(`management/${id}`);
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -147,10 +146,24 @@ export default {
         arr.push(item.id);
       });
       this.multipleSelection = arr;
-      console.log(this.multipleSelection);
     },
-    batchDelete(){
-      
+    // todo 批量删除假的
+    async batchDelete() {
+      const deleteArr = this.multipleSelection;
+      if (
+        deleteArr.length == 0 ||
+        deleteArr.length == undefined ||
+        deleteArr.length == null
+      ) {
+        this.$message({
+          type: "info",
+          message: "请选择要删除的对象"
+        });
+      }
+      for (let i = 0, l = deleteArr.length; i < l; i++) {
+        await this.$http.delete(`management/${deleteArr[i]}`);
+      }
+      this.getdata();
     }
   }
 };
@@ -175,24 +188,25 @@ export default {
   margin-top: 20px;
   display: flex;
   .form {
-    flex: 1.5;
-    margin-right: 10px;
+    flex: 1;
+    min-width: 200px;
+    margin-left: 10px;
     .tittle {
+      width: 100%;
       height: 100%;
-      .form {
+      .el-card__body {
         height: 100%;
-        .el-card__body {
-          height: 100%;
-        }
       }
     }
     .el-card {
       box-shadow: none;
+      width: 100%;
       height: 100%;
     }
   }
   .el-table {
-    flex: 3;
+    flex: 4;
+    width: 100%;
   }
 }
 </style>
