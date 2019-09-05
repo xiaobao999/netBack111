@@ -85,7 +85,8 @@ export default {
     handleRemove() {},
     handlePreview() {},
     handleExceed() {},
-    beforeRemove() {}
+    beforeRemove() {},
+    close(){}
   }
 };
 </script>

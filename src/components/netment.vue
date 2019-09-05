@@ -2,6 +2,7 @@
   <div class="netstration">
     <div class="search">
       <el-input v-model="input" placeholder="请输入图谱名称"></el-input>
+      <el-button type="primary" @click="searchbtn">点击查找</el-button>
     </div>
     <div class="atlas">
       <div class="addatlas" @click="eject('add')">
@@ -27,8 +28,7 @@
         </div>
       </div>
     </div>
-    <!-- 编辑添加弹出页面 -->
-    <el-dialog title :visible.sync="dialogFormVisible" width="30%">
+    <el-dialog :visible.sync="dialogFormVisible" width="30%" close-on-press-escape>
       <el-form :model="form">
         <el-form-item label="名称：" :label-width="formLabelWidth">
           <el-input v-model="form.atlasname" autocomplete="off"></el-input>
@@ -41,10 +41,6 @@
         </el-form-item>
         <el-form-item label="所属领域：" :label-width="formLabelWidth">
           <el-input v-model="form.atlasfield" autocomplete="off"></el-input>
-        </el-form-item>
-        <!-- todo visibility改一下 -->
-        <el-form-item label="id：" :label-width="formLabelWidth" style="visibility:hidden">
-          <el-input v-model="form.id" autocomplete="off" style="visibility:hidden"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer" v-if="'edit'==dialogFormstate">
@@ -60,8 +56,8 @@
 </template>
 
 <script>
+let datalist;
 export default {
-  name: "HelloWorld",
   data() {
     return {
       atlaslist: [],
@@ -90,21 +86,55 @@ export default {
     this.loaddata();
   },
   methods: {
+    //搜索
+    searchbtn() {
+      const searchbtn = this.input;
+      if (searchbtn == "") {
+        this.loaddata();
+      }
+      var reg = RegExp(searchbtn);
+      const arrlist = [];
+      for (let i = 0; i < datalist.length; i++) {
+        if (datalist[i].atlasname.match(reg)) {
+          arrlist.push(datalist[i]);
+        }
+      }
+      this.atlaslist = arrlist;
+    },
     loaddata() {
       this.$http.get("netment").then(res => {
         var data = res.data;
-        console.log(data);
         if (data.length > 0) {
           this.atlaslist = data;
+          datalist = data;
         }
       });
     },
     delete_tp(index) {
-      this.$http.delete(
-        "netment/" + this.atlaslist[index].id
-      );
-      this.atlaslist.splice(index, 1);
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          const res = await this.$http.delete(
+            "netment/" + this.atlaslist[index].id
+          );
+          if (res.status == 200) {
+            this.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
+
     eject(e, index) {
       this.dialogFormstate = e;
       this.dialogFormVisible = true;
@@ -122,11 +152,10 @@ export default {
         name: "datement"
       });
     },
-    editatlas() {
+    async editatlas() {
       let n = this.atlaslist.findIndex(item => item.id == this.form.id);
       this.atlaslist[n] = this.form;
-      console.log(this.form.id);
-      this.$http.put(
+      await this.$http.put(
         "netment/" + this.form.id,
         {
           atlasname: this.form.atlasname,
@@ -139,6 +168,7 @@ export default {
           emulateJSON: true
         }
       );
+      await this.loaddata()
       this.dialogFormVisible = false;
     },
     addatlas() {
@@ -161,7 +191,7 @@ export default {
           arr[0].id = response.data.id;
         });
       // this.form.id = this.atlaslist.length + 1;
-      this.atlaslist = this.atlaslist.concat(arr);
+      this.loaddata();
       this.dialogFormVisible = false;
     },
     cancel() {
@@ -172,17 +202,10 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.netstration {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
 .search {
   width: 300px;
+  display: flex;
 }
 .atlas {
   margin-top: 30px;

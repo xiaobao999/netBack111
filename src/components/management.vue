@@ -151,6 +151,7 @@ export default {
     async batchDelete() {
       const deleteArr = this.multipleSelection;
       if (
+        deleteArr == undefined ||
         deleteArr.length == 0 ||
         deleteArr.length == undefined ||
         deleteArr.length == null
@@ -159,6 +160,7 @@ export default {
           type: "info",
           message: "请选择要删除的对象"
         });
+        return;
       }
       for (let i = 0, l = deleteArr.length; i < l; i++) {
         await this.$http.delete(`management/${deleteArr[i]}`);
