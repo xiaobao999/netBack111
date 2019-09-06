@@ -1,6 +1,6 @@
 <template>
   <div class="guration">
-    <div class="gurationtree">
+    <div class="gurationtree" style="width:200px">
       <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
       <el-tree
         class="filter-tree"
@@ -33,7 +33,6 @@
   overflow-x: scroll;
   overflow-y: auto;
   height: 100%;
-  width: 200px;
   .el-tree > .el-tree-node {
     min-width: 100%;
     display: inline-block !important;
@@ -42,6 +41,7 @@
 
 #myChart {
   flex: 1;
+  overflow: hidden;
 }
 .el-button--mini.is-circle {
   padding: 2px;
@@ -111,7 +111,7 @@ let option = {
         }
       },
       force: {
-        repulsion: 5000
+        repulsion: 3000
       },
       nodes: nodes,
       edges: edges
