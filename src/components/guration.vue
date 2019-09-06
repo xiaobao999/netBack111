@@ -1,8 +1,7 @@
 <template>
   <div class="guration">
-    <div class="mytree">
+    <div class="gurationtree">
       <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
-
       <el-tree
         class="filter-tree"
         :data="data"
@@ -14,9 +13,9 @@
       >
         <span class="custom-tree-node" slot-scope="{ node, data }">
           <span>{{ node.label }}</span>
-          <span>
+          <span v-if="(data.pid)">
             <el-button icon="el-icon-plus" circle size="mini" @click="() => append(data)"></el-button>
-            <el-button icon="el-icon-minus" circle size="mini" @click="() => remove(node, data)"></el-button>
+            <el-button icon="el-icon-minus" circle size="mini" @click="() => remove(data)"></el-button>
           </span>
         </span>
       </el-tree>
@@ -30,12 +29,19 @@
   height: 100%;
   display: flex;
 }
-.mytree {
+.gurationtree {
+  overflow-x: scroll;
+  overflow-y: auto;
   height: 100%;
+  width: 200px;
+  .el-tree > .el-tree-node {
+    min-width: 100%;
+    display: inline-block !important;
+  }
 }
+
 #myChart {
-  width: 100%;
-  height: 100%;
+  flex: 1;
 }
 .el-button--mini.is-circle {
   padding: 2px;
@@ -73,8 +79,8 @@ let option = {
       symbolRotate: 0,
       legendHoverLink: true,
       roam: false,
-      //draggable: true,
-      //hoverAnimation: true,
+      draggable: true,
+      hoverAnimation: true,
       focusNodeAdjacency: true,
       edgeSymbol: ["arrow", "none"],
       edgeSymbolSize: [8, 8],
@@ -194,57 +200,86 @@ export default {
         nodes = [...nodes, { name: data.label }];
       }
       edgesarr.push(data.label);
-      console.log(edgesarr);
-      function getedges(edgesarr) {
-        if (edgesarr.length == 1) {
-          edges = [
-            {
-              target: "导入数据",
-              source: edgesarr[0]
-            },
-            {
-              target: edgesarr[0],
-              source: "导出数据"
-            }
-          ];
-        } else {
-          console.log(edgesarr.length);
-          // for (let i = 0, l = edgesarr.length; i < l; i++) {
-          //   // if (i - 1 < 0) continue;
-          //   edges.push({
-          //     target: edgesarr[i],
-          //     source: edgesarr[i+1]
-          //   });
-          // }
-          edges = [
-            {
-              target: "导入数据",
-              source: edgesarr[0]
-            },
-            {
-              target: edgesarr[edgesarr.length - 1],
-              source: "导出数据"
-            }
-          ];
-        }
-        return edges;
-      }
-      getedges(edgesarr);
-      console.log(edges, 999);
+      this.getedges(edgesarr);
       option.series[0].nodes = nodes;
       option.series[0].edges = edges;
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption(option);
     },
-    remove(node, data) {},
+    remove(data) {
+      const lablenode = data.label;
+
+      const lablestate = nodes.findIndex(item => {
+        return item.name == lablenode;
+      });
+      if (lablestate == -1) {
+        this.$message.error({
+          showClose: true,
+          message: "未添加流程不可移除",
+          type: "error"
+        });
+        return;
+      }
+      nodes.splice(lablestate, 1);
+      const edgesIndex = edgesarr.findIndex(item => {
+        return item == lablenode;
+      });
+      edgesarr.splice(edgesIndex, 1);
+      this.getedges(edgesarr);
+      option.series[0].nodes = nodes;
+      option.series[0].edges = edges;
+      let myChart = this.$echarts.init(document.getElementById("myChart"));
+      myChart.setOption(option);
+      // nodes.
+    },
     filterNode(value, data) {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
-    handleNodeClick(data) {},
+    handleNodeClick() {},
     drawLine() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption(option);
+    },
+    getedges(edgesarr) {
+      if (edgesarr.length == 0) {
+        edges = [
+          {
+            target: "导入数据",
+            source: "导出数据"
+          }
+        ];
+      } else if (edgesarr.length == 1) {
+        edges = [
+          {
+            target: "导入数据",
+            source: edgesarr[0]
+          },
+          {
+            target: edgesarr[0],
+            source: "导出数据"
+          }
+        ];
+      } else {
+        edges = [
+          {
+            target: "导入数据",
+            source: edgesarr[0]
+          },
+          {
+            target: edgesarr[edgesarr.length - 1],
+            source: "导出数据"
+          }
+        ];
+        for (let i = 0, l = edgesarr.length; i < l; i++) {
+          // if (i - 1 < 0) continue;
+          edges.push({
+            target: edgesarr[i],
+            source: edgesarr[i + 1]
+          });
+        }
+      }
+      return edges;
     }
   }
 };

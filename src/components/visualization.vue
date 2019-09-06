@@ -54,7 +54,7 @@
     </el-dialog>
   </div>
 </template>
-<style lang="less">
+<style lang="less" scoped>
 // tag样式
 .button-new-tag {
   margin-left: 10px;
@@ -89,6 +89,7 @@
 
 .visualization {
   display: flex;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   > div {
@@ -268,7 +269,6 @@ export default {
       for (i = 0; i < this.dynamicTags.length; i++) {
         text += "label_like=" + this.dynamicTags[i] + "&";
       }
-      console.log(text);
       if (text.length === 0) {
         this.data = [
           {
@@ -394,7 +394,6 @@ export default {
         for (i = 0; i < this.dynamicTags.length; i++) {
           text += "label_like=" + this.dynamicTags[i] + "&";
         }
-        console.log(text);
         this.$http.get("tree_author?" + text).then(res => {
           const data = res.data;
           if (data.length > 0) {
@@ -413,7 +412,6 @@ export default {
         });
         this.$http.get("tree_publisher?" + text).then(res => {
           const data = res.data;
-          console.log(data);
           if (data.length > 0) {
             this.$refs.tree.data[2].children = data;
           } else {
@@ -1083,7 +1081,6 @@ export default {
       //是否需要把json里每个数据都加上一个type属性，然后可以做if判断和小球双击查询判断
       this.$http.get("author1?id=" + this.selectedNodeID).then(res => {
         var data = res.data;
-        console.log(data);
         if (data == "" || data == undefined) return;
         myChart.setOption({
           series: [
