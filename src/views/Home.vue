@@ -26,8 +26,10 @@
           @close="handleClose"
           :collapse="isCollapse"
         >
-          <el-switch v-model="isCollapse"></el-switch>
-          <div>{{!isCollapse?'收起':'展开'}}</div>
+          <div class="Tips">
+            <el-switch v-model="isCollapse"></el-switch>
+            <b>{{!isCollapse?'收起':'展开'}}</b>
+          </div>
           <el-menu-item index="netment">
             <i class="el-icon-menu"></i>
             <span slot="title">文献网络管理</span>
@@ -145,5 +147,23 @@ export default {
     }
     // 开关样式
   }
+}
+.Tips {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  b {
+    font-size: 12px;
+    color: #fff;
+  }
+}
+/deep/.el-switch.is-checked .el-switch__core {
+  border-color: #409eff;
+  background-color: #006586 !important;
+}
+/deep/.el-switch__core {
+  border-color: #409eff;
+  background: #006586 !important;
 }
 </style>
