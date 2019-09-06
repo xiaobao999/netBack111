@@ -29,13 +29,23 @@ export default {
   },
   methods: {
     async handleLogin() {
-      // const res = await this.$http.post(`login`, this.formdata);
-      // const {
-      //   data: {
-      //     data,
-      //     meta: { msg, status }
-      //   }
-      // } = res;
+      const res = await this.$http.post(
+        `http://localhost:52459/connect/token`,
+        {
+          username: "pedoc",
+          password: "12345",
+          grant_type: "password",
+          client_id: "itms",
+          client_secret: "itms"
+        }
+      );
+      const {
+        data: {
+          data,
+          meta: { msg, status }
+        }
+      } = res;
+      console.log(res);
     }
   }
 };

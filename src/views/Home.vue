@@ -15,7 +15,7 @@
       </el-menu>
     </div>
     <div class="main">
-      <div class="left_nav">
+      <div class="left_nav" :class="isCollapse?'Retract':'open'">
         <el-menu
           :router="true"
           :default-active="defaultnav"
@@ -26,6 +26,8 @@
           @close="handleClose"
           :collapse="isCollapse"
         >
+          <el-switch v-model="isCollapse"></el-switch>
+          <div>{{!isCollapse?'收起':'展开'}}</div>
           <el-menu-item index="netment">
             <i class="el-icon-menu"></i>
             <span slot="title">文献网络管理</span>
@@ -108,6 +110,11 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
+    .subject {
+      overflow: hidden;
+      width: 100%;
+      flex: 1;
+    }
   }
   .nav_top {
     display: flex;
@@ -120,24 +127,23 @@ export default {
       top: 8px;
     }
   }
+  .Retract {
+    width: 65px;
+  }
+  .open {
+    width: 200px;
+  }
   .el-menu.el-menu--horizontal {
     border-bottom: none;
   }
   .left_nav {
     height: 100%;
+    overflow: hidden;
     .el-menu {
       height: 100%;
-      width: calc(100% -1px);
-      .el-submenu .el-menu-item {
-        width: calc(100% - 2px);
-      }
+      overflow: hidden;
     }
+    // 开关样式
   }
-}
-</style>
-<style>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  height: 100%;
 }
 </style>
