@@ -22,8 +22,6 @@
           background-color="#006586"
           text-color="#fff"
           active-text-color="#ee6e15"
-          @open="handleOpen"
-          @close="handleClose"
           :collapse="isCollapse"
         >
           <div class="Tips">
@@ -87,6 +85,10 @@ export default {
     this.geturl();
   },
   methods: {
+    state() {
+      console.log(1111);
+      this.isCollapse = !this.isCollapse;
+    },
     handleSelect() {},
     handleOpen() {},
     handleClose() {},

@@ -61,7 +61,7 @@
 <style scoped lang="less">
 .dataimport {
   width: 800px;
-  margin-left: 300px;
+  margin: 0 auto;
   .el-tabs {
     margin-top: 0;
   }
@@ -86,7 +86,7 @@ export default {
     handlePreview() {},
     handleExceed() {},
     beforeRemove() {},
-    close(){}
+    close() {}
   }
 };
 </script>
