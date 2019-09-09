@@ -87,14 +87,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user"])
   },
   created() {
     this.geturl();
   },
   methods: {
     state() {
-      console.log(1111);
       this.isCollapse = !this.isCollapse;
     },
     handleSelect() {},
@@ -197,4 +196,5 @@ export default {
   border-color: #409eff;
   background: #006586 !important;
 }
+
 </style>

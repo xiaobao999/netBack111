@@ -1,24 +1,39 @@
 <template>
-  <div class="login-wrap">
-    <el-form
-      :label-position="labelPosition"
-      label-width="80px"
-      :model="formdata"
-      class="login-form"
-    >
-      <el-form-item label="用户名">
-        <el-input v-model="formdata.username"></el-input>
-      </el-form-item>
-      <el-form-item label="密码">
-        <el-input type="password" v-model="formdata.password"></el-input>
-      </el-form-item>
-      <el-button type="primary" class="login-btn" @click.prevent="handleLogin()">登陆</el-button>
-    </el-form>
+  <div style="height:100%">
+    <div class="nav">
+      <el-menu
+        :default-active="activeIndex2"
+        class="nav_top"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#017398"
+        text-color="#fff"
+        active-text-color="#ee6e15"
+      >
+        <img src="../assets/navlogo.png" alt />
+      </el-menu>
+    </div>
+    <div class="login-wrap">
+      <el-form
+        :label-position="labelPosition"
+        label-width="80px"
+        :model="formdata"
+        class="login-form"
+      >
+        <el-form-item label="用户名">
+          <el-input v-model="formdata.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="formdata.password"></el-input>
+        </el-form-item>
+        <el-button type="primary" class="login-btn" @click.prevent="handleLogin()">登陆</el-button>
+      </el-form>
+    </div>
   </div>
 </template>
 <script>
 import md5 from "js-md5";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -30,6 +45,11 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["getusername"]),
+    ...mapActions(["mygetusername"]),
+    getusername() {
+      this.mygetusername(this.formdata.username);
+    },
     async handleLogin() {
       const { username, password } = this.formdata;
       if (username == "") {
@@ -55,15 +75,26 @@ export default {
       this.$router.push({
         name: "home"
       });
+      this.getusername(this.formdata.username);
     }
   }
 };
 </script>
 <style lang="less" scoped>
+.nav {
+  height: 60px;
+  ul {
+    height: 100%;
+  }
+}
+img {
+  margin: 5px 20px;
+  height: 45px;
+}
 .login-wrap {
   //background: #324152;
+  margin-top: 200px;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,6 +104,7 @@ export default {
   border-radius: 5px;
   width: 400px;
   padding: 30px;
+  border: 1px solid #a8a8a8;
 }
 .login-btn {
   width: 100%;

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        user: 'admin'
+        user: ''
     },
     mutations: {
         getusername(state, n) {
@@ -13,6 +13,8 @@ export default new Vuex.Store({
         }
     },
     actions: {
-
+        mygetusername(get, n) {
+            get.commit("getusername", n)
+        }
     }
 })
