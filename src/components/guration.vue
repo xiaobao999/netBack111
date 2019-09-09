@@ -21,6 +21,20 @@
       </el-tree>
     </div>
     <div id="myChart"></div>
+    <el-dialog :visible.sync="dialogTableVisible" width="30%">
+      <h2 class="bluesize">知识存储</h2>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="活动区域">
+          <el-select v-model="form.region" placeholder="运行环境">
+            <el-option label="运行环境1" value="1"></el-option>
+            <el-option label="运行环境2" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">设置未可复用组件</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 <style scoped lang="less">
@@ -28,6 +42,13 @@
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
+  .el-dialog {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    right: 0;
+  }
 }
 .gurationtree {
   overflow-x: scroll;
@@ -45,6 +66,10 @@
 }
 .el-button--mini.is-circle {
   padding: 2px;
+}
+.el-dialog {
+  width: 100%;
+  height: 100%;
 }
 </style>
 <script>
@@ -126,7 +151,9 @@ export default {
   },
   data() {
     return {
+      form: {},
       filterText: "",
+      dialogTableVisible: false,
       data: [
         {
           id: 1,
@@ -240,6 +267,9 @@ export default {
     drawLine() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption(option);
+      myChart.on("click", () => {
+        this.dialogTableVisible = true;
+      });
     },
     getedges(edgesarr) {
       if (edgesarr.length == 0) {

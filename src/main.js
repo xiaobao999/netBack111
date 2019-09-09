@@ -5,7 +5,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import echarts from 'echarts'
 import HttpSever from '@/http.js'
-
 import Router from 'vue-router'
 
 const originalPush = Router.prototype.push

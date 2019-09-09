@@ -28,7 +28,7 @@
           <el-form-item label="备注信息">
             <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.information"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item style="text-align:right;">
             <el-button type="primary" @click="onSubmit">保存</el-button>
             <el-button @click="close">取消</el-button>
           </el-form-item>
@@ -48,7 +48,7 @@
           <el-form-item label="备注信息">
             <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.information"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item style="text-align:right;">
             <el-button type="primary" @click="onSubmit">保存</el-button>
             <el-button @click="close">取消</el-button>
           </el-form-item>
@@ -64,6 +64,9 @@
   margin: 0 auto;
   .el-tabs {
     margin-top: 0;
+  }
+  .el-form-item {
+    margin-bottom: 30px;
   }
 }
 </style>

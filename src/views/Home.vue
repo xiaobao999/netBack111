@@ -11,11 +11,11 @@
         active-text-color="#ee6e15"
       >
         <img src="../assets/navlogo.png" alt />
-        <el-menu-item @click="datement">图谱管理</el-menu-item>
+        <el-menu-item @click="logout">退出</el-menu-item>
       </el-menu>
     </div>
     <div class="main">
-      <div class="left_nav" :class="isCollapse?'Retract':'open'">
+      <div class="left_nav" :class="isCollapse?'Retract':'open'" v-if="leftbar">
         <el-menu
           :router="true"
           :default-active="defaultnav"
@@ -25,8 +25,8 @@
           :collapse="isCollapse"
         >
           <div class="Tips">
-            <el-switch v-model="isCollapse"></el-switch>
-            <b>{{!isCollapse?'收起':'展开'}}</b>
+            <el-switch v-model="change" @change="switchisCollapse"></el-switch>
+            <b>{{!change?'收起':'展开'}}</b>
           </div>
           <el-menu-item index="netment">
             <i class="el-icon-menu"></i>
@@ -72,13 +72,16 @@
   </div>
 </template>
 <script>
+import loginVue from "../components/login.vue";
 export default {
   data() {
     return {
       activeIndex: "1",
       activeIndex2: "1",
       defaultnav: "netment",
-      isCollapse: false
+      isCollapse: false,
+      change: false,
+      leftbar: true
     };
   },
   created() {
@@ -96,10 +99,31 @@ export default {
       const URL = this.$route.path.split("/");
       this.defaultnav = URL[1];
     },
-    datement() {
-      this.$router.push({
-        name: "datement"
-      });
+    switchisCollapse() {
+      this.isCollapse = this.change;
+    },
+    logout() {
+      this.$confirm("确定退出登录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "退出成功!"
+          });
+          sessionStorage.removeItem("login");
+          this.$router.push({
+            path: "/login"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消退出"
+          });
+        });
     }
   }
 };

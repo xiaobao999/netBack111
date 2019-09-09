@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import md5 from "js-md5";
 export default {
   data() {
     return {
@@ -29,23 +30,30 @@ export default {
   },
   methods: {
     async handleLogin() {
-      const res = await this.$http.post(
-        `http://localhost:52459/connect/token`,
-        {
-          username: "pedoc",
-          password: "12345",
-          grant_type: "password",
-          client_id: "itms",
-          client_secret: "itms"
-        }
-      );
-      const {
-        data: {
-          data,
-          meta: { msg, status }
-        }
-      } = res;
-      console.log(res);
+      const { username, password } = this.formdata;
+      if (username == "") {
+        this.$message.error("用户名不能为空");
+        return;
+      }
+      if (password == "") {
+        this.$message.error("密码不能为空");
+        return;
+      }
+      if (username != "super" && username != "admin") {
+        this.$message.error("用户名错误");
+        return;
+      }
+      const res = await this.$http.get(username);
+      const pwd = res.data;
+      if (pwd.pwd != md5(password)) {
+        this.$message.error("密码错误");
+        return;
+      }
+      sessionStorage.setItem("login", md5(password));
+      this.$message.success("登录成功");
+      this.$router.push({
+        name: "home"
+      });
     }
   }
 };

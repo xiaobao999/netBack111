@@ -12,12 +12,19 @@ import Version from './components/version'
 import Guration from './components/guration'
 import Login from './components/login'
 
+import {
+  Message
+} from 'element-ui'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
+    path: '/login',
+    name: 'login',
+    component: Login,
+  }, {
     path: '/',
     name: 'home',
     component: Home,
@@ -59,9 +66,17 @@ export default new Router({
       name: 'guration',
       component: Guration
     }]
-  }, {
-    path: '/login',
-    name: 'login',
-    component: Login,
   }]
 })
+router.beforeEach((to, from, next) => {
+  if (to.path != "/login") {
+    var value = sessionStorage.getItem("login");
+    if (value == undefined || value == null || value == "") {
+      Message.error("您还没有登录请先登录");
+      next("/login")
+    }
+    next();
+  }
+  next();
+})
+export default router

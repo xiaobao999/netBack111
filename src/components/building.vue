@@ -42,10 +42,10 @@
                   <span style="float:right">共4条属性信息</span>
                 </div>
                 <el-table :data="tableData" border max-height="650" stripe style="width: 100%">
-                  <el-table-column prop="date" label="属性名" min-width="200"></el-table-column>
-                  <el-table-column prop="name" label="属性别名" min-width="200"></el-table-column>
-                  <el-table-column prop="address" label="属性类型" min-width="200"></el-table-column>
-                  <el-table-column prop="address" label="单位" min-width="200"></el-table-column>
+                  <el-table-column prop="name" label="属性名" min-width="200"></el-table-column>
+                  <el-table-column prop="alias" label="属性别名" min-width="200"></el-table-column>
+                  <el-table-column prop="type" label="属性类型" min-width="200"></el-table-column>
+                  <el-table-column prop="company" label="单位" min-width="200"></el-table-column>
                   <el-table-column fixed="right" label="操作" width="100">
                     <template slot-scope="scope">
                       <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
@@ -71,7 +71,9 @@
                   <el-table-column prop="relationName" label="关系名" min-width="150"></el-table-column>
                   <el-table-column prop="parentName" label="所属概念" min-width="150"></el-table-column>
                   <el-table-column prop="relationOtherName" label="关系别名" min-width="150"></el-table-column>
-                  <el-table-column prop="objectName" label="对象概念" min-width="200"></el-table-column>
+                  <el-table-column prop="objectName" label="对象概念" min-width="200">
+                    <!-- 多个tag -->
+                  </el-table-column>
                   <el-table-column prop="relationType" label="类型" min-width="100"></el-table-column>
                   <el-table-column fixed="right" label="操作" width="100">
                     <template slot-scope="scope">
@@ -87,7 +89,12 @@
         <div class="formAttribute" style="display:none">
           <div style="border-bottom:1px solid #d1d4d1;padding:10px 5px;margin-bottom:15px">
             <span>属性设置</span>
-            <span style="float:right;cursor: pointer;" @click="closeForm('formAttribute')">X</span>
+            <el-button
+              icon="el-icon-close"
+              style="float: right; padding: 5px"
+              circle
+              @click="closeForm('formAttribute')"
+            ></el-button>
           </div>
           <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="属性名">
@@ -120,7 +127,12 @@
         <div class="formRelation" style="display:none">
           <div style="border-bottom:1px solid #d1d4d1;padding:10px 5px;margin-bottom:15px">
             <span>关系设置</span>
-            <span style="float:right;cursor: pointer;" @click="closeForm('formRelation')">X</span>
+            <el-button
+              icon="el-icon-close"
+              style="float: right; padding: 5px"
+              circle
+              @click="closeForm('formRelation')"
+            ></el-button>
           </div>
           <el-form ref="form" :model="relationform" label-width="80px">
             <el-form-item label="关系名">
@@ -159,28 +171,7 @@ export default {
     return {
       msg: "",
       describe: "",
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ], //属性信息table
+      tableData: [], //属性信息table
       relationTableData: [
         {
           relationName: "配备（peiBei）",
@@ -227,12 +218,20 @@ export default {
       fileList: [] //上传列表
     };
   },
+  created() {
+    this.getdata();
+  },
   methods: {
     handleNodeClick() {},
-    handleClick() {
+    async handleClick(e) {
       $(".formAttribute").show();
       tableWidthS = document.body.clientWidth - 200 - 275 - 300 + "px";
       $(".building_right_content_tabs").css("width", tableWidthS);
+      this.formshow = true;
+      const id = e.id;
+      const res = await this.$http.get(`building/${id}`);
+      const { data } = res;
+      this.form = data;
     },
     relationClick() {
       $(".formRelation").show();
@@ -240,7 +239,8 @@ export default {
       $(".building_right_content_tabs").css("width", tableWidthS);
     },
     append(data) {
-      const newChild = { id: id++, label: "testtest" };
+      console.log(data);
+      const newChild = { id: id++, label: `概念${data.children.length + 1}` };
       if (!data.children) {
         this.$set(data, "children", []);
       }
@@ -305,10 +305,14 @@ export default {
     },
     handleChange(file, fileList) {
       this.fileList = fileList.slice(-3);
+    },
+    // 首屏数据
+    async getdata() {
+      const res = await this.$http.get("building");
+      // console.log(res);
+      const { data } = res;
+      this.tableData = data;
     }
-  },
-  mounted: function() {
-    this.$nextTick(function() {});
   }
 };
 </script>
