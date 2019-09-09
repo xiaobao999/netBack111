@@ -18,6 +18,7 @@
 </template>
 <script>
 import md5 from "js-md5";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {

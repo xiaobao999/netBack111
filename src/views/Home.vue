@@ -11,6 +11,7 @@
         active-text-color="#ee6e15"
       >
         <img src="../assets/navlogo.png" alt />
+        <el-menu-item>{{user}}</el-menu-item>
         <el-menu-item @click="logout">退出</el-menu-item>
       </el-menu>
     </div>
@@ -73,6 +74,7 @@
 </template>
 <script>
 import loginVue from "../components/login.vue";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -83,6 +85,9 @@ export default {
       change: false,
       leftbar: true
     };
+  },
+  computed: {
+    ...mapState(["user"]),
   },
   created() {
     this.geturl();

@@ -100,11 +100,8 @@
             <el-form-item label="属性名">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
-            <el-form-item label="英文名称">
-              <el-input v-model="form.Ename"></el-input>
-            </el-form-item>
-            <el-form-item label="别名">
-              <el-input v-model="form.othername"></el-input>
+            <el-form-item label="属性别名">
+              <el-input v-model="form.alias"></el-input>
             </el-form-item>
             <el-form-item label="单位">
               <el-input v-model="form.company"></el-input>
@@ -119,7 +116,7 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">确定</el-button>
+              <el-button type="primary" @click="onSubmit()">确定</el-button>
               <el-button>取消</el-button>
             </el-form-item>
           </el-form>
@@ -204,7 +201,7 @@ export default {
       activeName: "first",
       form: {
         name: "",
-        type: [],
+        type: "",
         Ename: "",
         othername: "",
         company: ""
