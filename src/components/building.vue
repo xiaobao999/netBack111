@@ -197,8 +197,8 @@ export default {
         children: "children",
         label: "label"
       },
-      msg: "",
-      describe: "",
+      msg: "概念1",
+      describe: "新概念",
       activeName: "second",
       tableData: [],
       formAttributeshow: false,
@@ -464,6 +464,19 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.building_title {
+  width: 100%;
+  height: 100px;
+  .building_right_title_Icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #d1d4d1;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
 }
 </style>
 
