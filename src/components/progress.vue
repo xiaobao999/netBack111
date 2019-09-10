@@ -6,15 +6,17 @@
         <el-table-column prop="date" label="Task ID"></el-table-column>
         <el-table-column prop="name" label="进度条">
           <template slot-scope="scope">
-            <el-progress :percentage="scope.row.name"></el-progress>
+            <div :class="scope.row.startup?'dynamic':''">
+              <el-progress :percentage="scope.row.name"></el-progress>
+            </div>
           </template>
         </el-table-column>
         <el-table-column prop="state" label="工作状态"></el-table-column>
         <el-table-column prop="mechanism" label="机构"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
-            <el-button type="text" size="small">启动</el-button>
-            <el-button type="text" size="small">停止</el-button>
+            <el-button type="text" size="small" @click="startup(scope.row)">启动</el-button>
+            <el-button type="text" size="small" @click="stopit(scope.row)">停止</el-button>
             <el-button type="text" size="small" @click="open(scope.row)">日志</el-button>
           </template>
         </el-table-column>
@@ -39,6 +41,7 @@
   </div>
 </template>
 <script>
+import $ from "jquery";
 export default {
   data() {
     return {
@@ -51,6 +54,12 @@ export default {
     this.getdata();
   },
   methods: {
+    startup(e) {
+      e.startup = true;
+    },
+    stopit(e) {
+      e.startup = false;
+    },
     handleClose() {},
     async open(e) {
       this.logshow = true;
@@ -64,10 +73,13 @@ export default {
       this.logshow = false;
     },
     async getdata() {
-      console.log(JSON.stringify(this.progresslog));
       const res = await this.$http.get(`progress`);
       this.tableData = res.data;
-    }
+    },
+    openanimation(e) {
+      let n = e;
+    },
+    closeanimation() {}
   }
 };
 </script>
@@ -100,5 +112,20 @@ export default {
     width: 100%;
     flex: 4;
   }
+}
+@keyframes myfirst {
+  from {
+    left: 0;
+    right: calc(100% - 10px);
+    background-color: yellowgreen;
+  }
+  to {
+    left: calc(100% - 10px);
+    right: 0%;
+    background-color: yellow;
+  }
+}
+.dynamic /deep/.el-progress-bar__inner {
+  animation: myfirst 5s infinite alternate;
 }
 </style>

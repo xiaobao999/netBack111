@@ -412,28 +412,32 @@
       "date": "52156321258",
       "name": 10,
       "state": "完好",
-      "mechanism": "北京大学"
+      "mechanism": "北京大学",
+      "startup": true
     },
     {
       "id": 2,
       "date": "52156321258",
       "name": 29,
       "state": "完好",
-      "mechanism": "北京大学"
+      "mechanism": "北京大学",
+      "startup": true
     },
     {
       "id": 3,
       "date": "52156321258",
       "name": 57,
       "state": "完好",
-      "mechanism": "北京大学"
+      "mechanism": "北京大学",
+      "startup": false
     },
     {
       "id": 4,
       "date": "52156321258",
       "name": 52,
       "state": "完好",
-      "mechanism": "北京大学"
+      "mechanism": "北京大学",
+      "startup": true
     }
   ],
   "progresslog": [
