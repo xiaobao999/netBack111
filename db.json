@@ -469,9 +469,9 @@
   "building": [
     {
       "id": 1,
-      "name": "属性1",
+      "name": "属性1111",
       "alias": "1号属性",
-      "type": "类型",
+      "type": "计算类型",
       "company": "北京"
     },
     {
@@ -494,6 +494,23 @@
       "alias": "4号属性",
       "type": "类型",
       "company": "北京"
+    },
+    {
+      "name": "",
+      "type": "",
+      "Ename": "",
+      "othername": "",
+      "company": "",
+      "id": 5
+    },
+    {
+      "name": "213",
+      "type": "计算类型",
+      "Ename": "",
+      "othername": "",
+      "company": "12313",
+      "alias": "12312",
+      "id": 7
     }
   ],
   "super": {
@@ -501,5 +518,56 @@
   },
   "admin": {
     "pwd": "b0baee9d279d34fa1dfd71aadb908c3f"
-  }
+  },
+  "information": [
+    {
+      "id": 1,
+      "relationName": "配备（peiBei）",
+      "parentName": "概念145",
+      "relationOtherName": "主要关系",
+      "objectName": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        8,
+        9,
+        0,
+        "123"
+      ],
+      "relationType": "非单值"
+    },
+    {
+      "id": 2,
+      "relationName": "配备（peiBei）",
+      "parentName": "概念1",
+      "relationOtherName": "主要关系",
+      "objectName": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        0
+      ],
+      "relationType": "单值"
+    },
+    {
+      "relationName": "456",
+      "parentName": "456",
+      "relationOtherName": "645",
+      "objectName": [
+        "4564",
+        "456",
+        "456"
+      ],
+      "relationType": "非单值",
+      "id": 4
+    }
+  ]
 }
