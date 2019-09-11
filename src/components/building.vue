@@ -283,7 +283,7 @@ export default {
 
     showInput() {
       this.inputVisible = true;
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         this.$refs.saveTagInput.$refs.input.focus();
       });
     },
@@ -304,6 +304,7 @@ export default {
       this.tableData = res1.data;
       this.relationTableData = res2.data;
     },
+    // 添加节点
     append(data) {
       const id = data.children.length + 1;
       data.children.push({
@@ -312,9 +313,8 @@ export default {
         label: `概念${id}`
       });
     },
-
+    // 删除子节点
     remove(data) {
-      const id = data.children.length;
       data.children.pop();
     },
     async handleClick(e) {
@@ -324,7 +324,7 @@ export default {
       const { data } = res;
       this.form = data;
     },
-    async onSubmit(ele) {
+    async onSubmit() {
       let id = this.form.id;
       if (id == undefined) {
         this.form.id = this.tableData.length + 1;

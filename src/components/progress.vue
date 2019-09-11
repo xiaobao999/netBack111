@@ -41,7 +41,6 @@
   </div>
 </template>
 <script>
-import $ from "jquery";
 export default {
   data() {
     return {
@@ -76,9 +75,7 @@ export default {
       const res = await this.$http.get(`progress`);
       this.tableData = res.data;
     },
-    openanimation(e) {
-      let n = e;
-    },
+    openanimation() {},
     closeanimation() {}
   }
 };
