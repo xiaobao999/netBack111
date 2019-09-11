@@ -82,10 +82,12 @@ let edges = [
 ];
 let nodes = [
   {
-    name: "导入数据"
+    name: "导入数据",
+    pid: 0
   },
   {
-    name: "导出数据"
+    name: "导出数据",
+    pid: 0
   }
 ];
 
@@ -122,7 +124,6 @@ let option = {
         type: "solid",
         opacity: 1,
         width: 2,
-        curveness: 0.5,
         color: "#19be6b"
       },
       cursor: "pointer",
@@ -224,9 +225,9 @@ export default {
         }
       }
       if (behavior) {
-        nodes = [...nodes, { name: data.label }];
+        nodes = [...nodes, { name: data.label, value: 1 }];
       }
-      edgesarr.push(data.label);
+      edgesarr.push(data);
       this.getedges(edgesarr);
       option.series[0].nodes = nodes;
       option.series[0].edges = edges;
@@ -249,7 +250,7 @@ export default {
       }
       nodes.splice(lablestate, 1);
       const edgesIndex = edgesarr.findIndex(item => {
-        return item == lablenode;
+        return item.label == lablenode;
       });
       edgesarr.splice(edgesIndex, 1);
       this.getedges(edgesarr);
@@ -272,40 +273,73 @@ export default {
       });
     },
     getedges(edgesarr) {
+      //      {
+      //   target: "导入数据",
+      //   source: "导出数据"
+      // }
+      // 1.先通过pid把数组分成两个
       if (edgesarr.length == 0) {
-        edges = [
+        return (edges = [
           {
             target: "导入数据",
             source: "导出数据"
           }
-        ];
-      } else if (edgesarr.length == 1) {
-        edges = [
-          {
-            target: "导入数据",
-            source: edgesarr[0]
-          },
-          {
-            target: edgesarr[0],
-            source: "导出数据"
-          }
-        ];
+        ]);
+      }
+      const pid1arr = [];
+      const pid2arr = [];
+      edges = [];
+      for (let i = 0, l = edgesarr.length; i < l; i++) {
+        if (edgesarr[i].pid == 1) {
+          pid1arr.push(edgesarr[i]);
+        } else if (edgesarr[i].pid == 2) {
+          pid2arr.push(edgesarr[i]);
+        }
+      }
+      // console.log(pid1arr, 11111111, pid2arr);
+      if (pid1arr.length == 0) {
+        for (let i = 0, l = pid2arr.length; i < l; i++) {
+          edges = edges.concat(
+            {
+              target: "导入数据",
+              source: pid2arr[i].label
+            },
+            {
+              target: pid2arr[i].label,
+              source: "导出数据"
+            }
+          );
+        }
+      } else if (pid2arr.length == 0) {
+        for (let i = 0, l = pid1arr.length; i < l; i++) {
+          edges = edges.concat(
+            {
+              target: "导入数据",
+              source: pid1arr[i].label
+            },
+            {
+              target: pid1arr[i].label,
+              source: "导出数据"
+            }
+          );
+        }
       } else {
-        edges = [
-          {
+        for (let i = 0, l = pid1arr.length; i < l; i++) {
+          edges = edges.concat({
             target: "导入数据",
-            source: edgesarr[0]
-          },
-          {
-            target: edgesarr[edgesarr.length - 1],
-            source: "导出数据"
+            source: pid1arr[i].label
+          });
+          for (let k = 0, kl = pid2arr.length; k < kl; k++) {
+            edges = edges.concat({
+              target: pid1arr[i].label,
+              source: pid2arr[k].label
+            });
           }
-        ];
-        for (let i = 0, l = edgesarr.length; i < l; i++) {
-          // if (i - 1 < 0) continue;
-          edges.push({
-            target: edgesarr[i],
-            source: edgesarr[i + 1]
+        }
+        for (let i = 0, l = pid2arr.length; i < l; i++) {
+          edges = edges.concat({
+            target: pid2arr[i].label,
+            source: "导出数据"
           });
         }
       }

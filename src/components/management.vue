@@ -190,7 +190,7 @@ export default {
   margin-top: 20px;
   display: flex;
   .form {
-    flex: 1;
+    flex: 1.5;
     min-width: 200px;
     margin-left: 10px;
     .tittle {
