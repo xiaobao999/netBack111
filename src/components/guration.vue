@@ -21,20 +21,23 @@
       </el-tree>
     </div>
     <div id="myChart"></div>
-    <el-dialog :visible.sync="dialogTableVisible" width="30%">
+    <el-button type="primary" class="diatelyrun" size="small" @click="goprogress">立即运行</el-button>
+    <div v-if="dialogTableVisible" width="30%">
       <h2 class="bluesize">知识存储</h2>
       <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="活动区域">
+        <el-form-item label="运行环境">
           <el-select v-model="form.region" placeholder="运行环境">
             <el-option label="运行环境1" value="1"></el-option>
             <el-option label="运行环境2" value="2"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="运行参数"></el-form-item>
         <el-form-item>
-          <el-button type="primary">设置未可复用组件</el-button>
+          <el-button type="primary" @click="close">确定</el-button>
+          <el-button @click="close">取消</el-button>
         </el-form-item>
       </el-form>
-    </el-dialog>
+    </div>
   </div>
 </template>
 <style scoped lang="less">
@@ -70,6 +73,9 @@
 .el-dialog {
   width: 100%;
   height: 100%;
+}
+.diatelyrun {
+  height: 30px;
 }
 </style>
 <script>
@@ -211,6 +217,14 @@ export default {
     this.drawLine();
   },
   methods: {
+    goprogress() {
+      this.$router.push({
+        name: "progress"
+      });
+    },
+    close() {
+      this.dialogTableVisible = false;
+    },
     append(data) {
       let behavior = true;
       for (let i = 0, l = nodes.length; i < l; i++) {
