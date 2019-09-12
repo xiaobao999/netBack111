@@ -33,17 +33,20 @@
               <span style="float:right">共{{tableData.length}}条属性信息</span>
             </div>
             <div class="build_content">
-              <el-table :data="tableData" border stripe style="width: 100%">
-                <el-table-column prop="name" label="属性名" min-width="200"></el-table-column>
-                <el-table-column prop="alias" label="属性别名" min-width="200"></el-table-column>
-                <el-table-column prop="type" label="属性类型" min-width="200"></el-table-column>
-                <el-table-column prop="company" label="单位" min-width="200"></el-table-column>
-                <el-table-column fixed="right" label="操作" width="100">
-                  <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
-                    <el-button type="text" size="small" @click="deleteAttribute(scope.row)">删除</el-button>
-                  </template>
-                </el-table-column>
+              <el-table :data="tableData" border stripe style="width: 100%" height="100%">
+                <el-scrollbar style="height: 100%;">
+                  <el-table-column prop="name" label="属性名"></el-table-column>
+                  <el-table-column prop="alias" label="属性别名"></el-table-column>
+                  <el-table-column prop="type" label="属性类型"></el-table-column>
+                  <el-table-column prop="company" label="单位"></el-table-column>
+                  <el-table-column fixed="right" label="操作" width="100">
+                    <template slot-scope="scope">
+                      <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+                      <el-button type="text" size="small" @click="deleteAttribute(scope.row)">删除</el-button>
+                    </template>
+                  </el-table-column>
+                </el-scrollbar>
+                <!-- /滚动条 -->
               </el-table>
               <div class="formAttribute" v-if="formAttributeshow">
                 <div style="border-bottom:1px solid #d1d4d1;padding:10px 5px;margin-bottom:15px">
@@ -87,17 +90,17 @@
               <span style="float:right">共{{relationTableData.length}}条属性信息</span>
             </div>
             <div class="build_content">
-              <el-table :data="relationTableData" border stripe style="width: 100%">
-                <el-table-column prop="relationName" label="关系名" min-width="150"></el-table-column>
-                <el-table-column prop="parentName" label="所属概念" min-width="150"></el-table-column>
-                <el-table-column prop="relationOtherName" label="关系别名" min-width="150"></el-table-column>
-                <el-table-column prop="objectName" label="对象概念" min-width="200">
+              <el-table :data="relationTableData" border stripe style="width: 100%" height="100%">
+                <el-table-column prop="relationName" label="关系名"></el-table-column>
+                <el-table-column prop="parentName" label="所属概念"></el-table-column>
+                <el-table-column prop="relationOtherName" label="关系别名"></el-table-column>
+                <el-table-column prop="objectName" label="对象概念" min-width="150">
                   <!-- 多个tag -->
                   <template slot-scope="scope">
                     <el-tag v-for="(item,i) in scope.row.objectName" :key="i">{{item}}</el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column prop="relationType" label="类型" min-width="100"></el-table-column>
+                <el-table-column prop="relationType" label="类型"></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100">
                   <template slot-scope="scope">
                     <el-button @click="relationshipopen(scope.row)" type="text" size="small">编辑</el-button>
@@ -178,17 +181,17 @@ export default {
         {
           pid: 0,
           id: 999,
-          label: "text",
+          label: "概念名",
           children: [
             {
               pid: 999,
               id: 1,
-              label: "概念1"
+              label: "属性信息"
             },
             {
               pid: 999,
               id: 2,
-              label: "概念2"
+              label: "关系信息"
             }
           ]
         }
@@ -199,7 +202,7 @@ export default {
       },
       msg: "概念1",
       describe: "新概念",
-      activeName: "second",
+      activeName: "first",
       tableData: [],
       formAttributeshow: false,
       form: {
@@ -265,6 +268,7 @@ export default {
     async onSubmitship() {
       let id = this.relationform.id;
       if (id == undefined) {
+        console.log(this.relationform);
         this.relationform.id = this.relationTableData.length + 1;
         await this.$http.post(`information`, this.relationform);
         this.getdata();
@@ -405,6 +409,7 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     .build_main {
       width: 100%;
@@ -479,4 +484,5 @@ export default {
   }
 }
 </style>
+
 

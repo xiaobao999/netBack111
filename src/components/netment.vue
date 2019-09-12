@@ -168,7 +168,7 @@ export default {
           emulateJSON: true
         }
       );
-      await this.loaddata()
+      await this.loaddata();
       this.dialogFormVisible = false;
     },
     addatlas() {
@@ -213,7 +213,7 @@ export default {
   flex-wrap: wrap;
   > div {
     margin: 0 10px 10px 0;
-    width: 23%;
+    width: 24%;
     height: 200px;
     text-align: center;
     border: 1px solid #c8c8c8;

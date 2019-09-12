@@ -7,7 +7,7 @@
         <el-table-column prop="name" label="进度条">
           <template slot-scope="scope">
             <div :class="scope.row.startup?'dynamic':''">
-              <el-progress :percentage="scope.row.name"></el-progress>
+              <el-progress :percentage="scope.row.name" :stroke-width="20"></el-progress>
             </div>
           </template>
         </el-table-column>
@@ -111,18 +111,25 @@ export default {
   }
 }
 @keyframes myfirst {
-  from {
-    left: 0;
-    right: calc(100% - 10px);
-    background-color: yellowgreen;
+  0% {
+    // transform: translateX(-100%);
+    background-color: rgb(0, 228, 245);
+    background-position: 0px 0px;
   }
-  to {
-    left: calc(100% - 10px);
-    right: 0%;
-    background-color: yellow;
+  50% {
+    // transform: translateX(-100%);
+    background-color: rgb(75, 165, 255);
+    background-position: 100px 0px;
+  }
+  100% {
+    // transform: translateX(0);
+    background-color: rgb(0, 228, 245);
+    background-position: 200px 0px;
   }
 }
 .dynamic /deep/.el-progress-bar__inner {
-  animation: myfirst 5s infinite alternate;
+  background: url(../assets/progress.png) repeat;
+  background-size: 200px 20px;
+  animation: myfirst 5s infinite linear;
 }
 </style>

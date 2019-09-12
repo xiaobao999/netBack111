@@ -110,9 +110,9 @@ let option = {
         "path://M19.300,3.300 L253.300,3.300 C262.136,3.300 269.300,10.463 269.300,19.300 L269.300,21.300 C269.300,30.137 262.136,37.300 253.300,37.300 L19.300,37.300 C10.463,37.300 3.300,30.137 3.300,21.300 L3.300,19.300 C3.300,10.463 10.463,3.300 19.300,3.300 Z",
       symbolSize: [150, 30],
       symbolRotate: 0,
-      legendHoverLink: true,
-      roam: false,
-      draggable: true,
+      legendHoverLink: false,
+      roam: true,
+      //draggable: true,
       hoverAnimation: true,
       focusNodeAdjacency: true,
       edgeSymbol: ["arrow", "none"],
@@ -143,10 +143,13 @@ let option = {
         }
       },
       force: {
-        repulsion: 3000
+        repulsion: 5000,
+        edgeLength: [5, 10],
+        layoutAnimation: true
       },
       nodes: nodes,
-      edges: edges
+      edges: edges,
+      animation: true
     }
   ]
 };

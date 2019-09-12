@@ -473,27 +473,20 @@
   "building": [
     {
       "id": 1,
-      "name": "属性1111",
-      "alias": "1号属性",
-      "type": "计算类型",
-      "company": "北京"
-    },
-    {
-      "id": 2,
       "name": "属性2",
       "alias": "2号属性",
       "type": "类型",
       "company": "北京"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "属性3",
       "alias": "2号属3",
       "type": "类型",
       "company": "北京"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "属性4",
       "alias": "4号属性",
       "type": "类型",
@@ -505,16 +498,97 @@
       "Ename": "",
       "othername": "",
       "company": "",
+      "id": 4
+    },
+    {
+      "name": "1",
+      "type": "数组型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
       "id": 5
     },
     {
-      "name": "213",
+      "name": "654",
       "type": "计算类型",
       "Ename": "",
       "othername": "",
-      "company": "12313",
-      "alias": "12312",
+      "company": "546",
+      "alias": "546",
+      "id": 6
+    },
+    {
+      "name": "1",
+      "type": "数组型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
       "id": 7
+    },
+    {
+      "name": "1",
+      "type": "数组型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 8
+    },
+    {
+      "name": "1",
+      "type": "计算类型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 9
+    },
+    {
+      "name": "1",
+      "type": "数组型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 10
+    },
+    {
+      "name": "1",
+      "type": "数组型",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 11
+    },
+    {
+      "name": "1",
+      "type": "日期",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 12
+    },
+    {
+      "name": "1",
+      "type": "",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 13
+    },
+    {
+      "name": "1",
+      "type": "",
+      "Ename": "",
+      "othername": "",
+      "company": "1",
+      "alias": "1",
+      "id": 14
     }
   ],
   "super": {
@@ -562,16 +636,114 @@
       "relationType": "单值"
     },
     {
-      "relationName": "456",
-      "parentName": "456",
-      "relationOtherName": "645",
+      "relationName": "42",
+      "parentName": "42",
+      "relationOtherName": "4",
       "objectName": [
-        "4564",
-        "456",
-        "456"
+        "4"
       ],
-      "relationType": "非单值",
+      "relationType": "单值",
+      "id": 3
+    },
+    {
+      "relationName": "4",
+      "parentName": "4",
+      "relationOtherName": "4",
+      "objectName": [
+        "4"
+      ],
+      "relationType": "单值",
       "id": 4
+    },
+    {
+      "relationName": "4",
+      "parentName": "4",
+      "relationOtherName": "4",
+      "objectName": [
+        "4"
+      ],
+      "relationType": "单值",
+      "id": 5
+    },
+    {
+      "relationName": "4",
+      "parentName": "4",
+      "relationOtherName": "4",
+      "objectName": [
+        "4"
+      ],
+      "relationType": "单值",
+      "id": 6
+    },
+    {
+      "relationName": "11111",
+      "parentName": "11",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 7
+    },
+    {
+      "relationName": "1",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 8
+    },
+    {
+      "relationName": "1",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 9
+    },
+    {
+      "relationName": "1",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "12"
+      ],
+      "relationType": "",
+      "id": 10
+    },
+    {
+      "relationName": "1",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 11
+    },
+    {
+      "relationName": "1",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 12
+    },
+    {
+      "relationName": "12",
+      "parentName": "1",
+      "relationOtherName": "1",
+      "objectName": [
+        "1"
+      ],
+      "relationType": "单值",
+      "id": 13
     }
   ]
 }
