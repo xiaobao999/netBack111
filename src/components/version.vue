@@ -2,7 +2,6 @@
   <div class="version">
     <div>
       <el-button type="primary" size="small" class @click="addEdition">保存当前版本</el-button>
-      <el-button type="primary" size="small" class>导出</el-button>
     </div>
     <div class="version_main">
       <el-table
@@ -21,6 +20,7 @@
             <!-- <el-button type="text" size="small">导出</el-button> -->
             <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
             <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
+            <el-button type="text" size="small" class>导出</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -40,7 +40,7 @@
               <el-input v-model="form.name"></el-input>
             </el-form-item>
             <el-form-item label="时间">
-              <el-input v-model="form.date"></el-input>
+              <el-date-picker v-model="form.date" type="datetime" placeholder="请选择时间"></el-date-picker>
             </el-form-item>
             <el-form-item label="创建人">
               <el-input v-model="form.person"></el-input>

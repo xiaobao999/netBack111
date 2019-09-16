@@ -7,7 +7,12 @@
         <el-table-column prop="name" label="进度条">
           <template slot-scope="scope">
             <div :class="scope.row.startup?'dynamic':''">
-              <el-progress :percentage="scope.row.name" :stroke-width="20"></el-progress>
+              <el-progress
+                :percentage="scope.row.name"
+                :stroke-width="16"
+                :text-inside="true"
+                :color="customColorMethod"
+              ></el-progress>
             </div>
           </template>
         </el-table-column>
@@ -18,6 +23,7 @@
             <el-button type="text" size="small" @click="startup(scope.row)">启动</el-button>
             <el-button type="text" size="small" @click="stopit(scope.row)">停止</el-button>
             <el-button type="text" size="small" @click="open(scope.row)">日志</el-button>
+            <el-button type="text" size="small" @click="deleteprogress(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,11 +59,20 @@ export default {
     this.getdata();
   },
   methods: {
+    customColorMethod(percentage) {
+      if (percentage == 100) {
+        return "#67c23a";
+      } else if (percentage < 100) {
+        return "#e6a23c";
+      }
+    },
     startup(e) {
       e.startup = true;
+      e.state = "启动";
     },
     stopit(e) {
       e.startup = false;
+      e.state = "停止";
     },
     handleClose() {},
     async open(e) {
@@ -74,6 +89,7 @@ export default {
     async getdata() {
       const res = await this.$http.get(`progress`);
       this.tableData = res.data;
+      console.log(res.data);
     },
     openanimation() {},
     closeanimation() {}

@@ -22,7 +22,7 @@
     </div>
     <div id="myChart"></div>
     <el-button type="primary" class="diatelyrun" size="small" @click="goprogress">立即运行</el-button>
-    <div v-if="dialogTableVisible" width="30%">
+    <div v-if="dialogTableVisible" width="30%" class="storage">
       <h2 class="bluesize">知识存储</h2>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="运行环境">
@@ -77,6 +77,9 @@
 .diatelyrun {
   height: 30px;
 }
+.storage {
+  margin-left: 20px;
+}
 </style>
 <script>
 let edgesarr = [];
@@ -113,7 +116,7 @@ let option = {
       legendHoverLink: false,
       roam: true,
       //draggable: true,
-      hoverAnimation: true,
+      //hoverAnimation: true,
       focusNodeAdjacency: true,
       edgeSymbol: ["arrow", "none"],
       edgeSymbolSize: [8, 8],
@@ -145,11 +148,11 @@ let option = {
       force: {
         repulsion: 5000,
         edgeLength: [5, 10],
-        layoutAnimation: true
+        //layoutAnimation: true
       },
       nodes: nodes,
       edges: edges,
-      animation: true
+      //animation: true
     }
   ]
 };
@@ -220,7 +223,17 @@ export default {
     this.drawLine();
   },
   methods: {
-    goprogress() {
+    async goprogress() {
+      let formdata = {
+        date: "52156321258",
+        id: 11,
+        mechanism: "北京大学",
+        name: 0,
+        startup: true,
+        state: "启动"
+      };
+      await this.$http.post(`progress`, formdata);
+
       this.$router.push({
         name: "progress"
       });

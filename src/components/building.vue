@@ -1,12 +1,27 @@
 <template>
   <div class="building">
     <div class="bulid_lift">
-      <el-tree :data="data" node-key="id" default-expand-all :expand-on-click-node="false">
+      <el-tree
+        :data="data"
+        node-key="id"
+        default-expand-all
+        :expand-on-click-node="false"
+        @node-click="handleNodeClick"
+      >
         <span class="custom-tree-node" slot-scope="{ node, data }">
           <span>{{ node.label }}</span>
           <span v-if="!(data.pid)">
-            <el-button icon="el-icon-plus" circle size="mini" @click="() => append(data)"></el-button>
-            <el-button icon="el-icon-minus" circle size="mini" @click="() => remove(data)"></el-button>
+            <el-button icon="el-icon-plus" circle size="mini" @click.stop="() => append(data)"></el-button>
+          </span>
+          <span v-if="(data.pid)">
+            <el-button icon="el-icon-minus" circle size="mini" @click.stop="() => remove(data)"></el-button>
+            <el-button
+              icon="el-icon-edit"
+              circle
+              size="mini"
+              @click.stop="() => modifyconcept(data)"
+              title="点击修改名称"
+            ></el-button>
           </span>
         </span>
       </el-tree>
@@ -20,14 +35,18 @@
           <span class="building_right_title_Icon"></span>
           <span>概念名</span>
         </div>
-        <div>
-          <span>概念名：{{msg}}</span>
-          <span style="margin-left:20px">描述：{{describe}}</span>
+        <div class="concept_name">
+          <span>概念名：</span>
+          <el-input v-model="msg" :disabled="true"></el-input>
+          <span style="margin-left:20px">描述：</span>
+          <el-input v-model="describe" style="width:100%;">
+            <el-button slot="suffix" icon="el-icon-edit" circle @click="editdescribe"></el-button>
+          </el-input>
         </div>
       </div>
       <div class="build_main">
         <el-tabs v-model="activeName">
-          <el-tab-pane label="属性信息" name="first">
+          <el-tab-pane label="属性信息" name="属性信息">
             <div class="btngroup">
               <el-button type="primary" size="small" @click="addformAttribute">新增</el-button>
               <span style="float:right">共{{tableData.length}}条属性信息</span>
@@ -35,8 +54,8 @@
             <div class="build_content">
               <el-table :data="tableData" border stripe style="width: 100%" height="100%">
                 <el-scrollbar style="height: 100%;">
-                  <el-table-column prop="name" label="属性名"></el-table-column>
                   <el-table-column prop="alias" label="属性别名"></el-table-column>
+                  <el-table-column prop="name" label="属性名"></el-table-column>
                   <el-table-column prop="type" label="属性类型"></el-table-column>
                   <el-table-column prop="company" label="单位"></el-table-column>
                   <el-table-column fixed="right" label="操作" width="100">
@@ -68,6 +87,7 @@
                   <el-form-item label="单位">
                     <el-input v-model="form.company"></el-input>
                   </el-form-item>
+                  <!-- 类型下拉框属性类型值 -->
                   <el-form-item label="属性类型">
                     <el-select v-model="form.type" placeholder="请选择类型">
                       <el-option label="数组型" value="数组型"></el-option>
@@ -84,7 +104,7 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="关系信息" name="second">
+          <el-tab-pane label="关系信息" name="关系信息">
             <div class="btngroup">
               <el-button type="primary" size="small" @click="addrelation">新增</el-button>
               <span style="float:right">共{{relationTableData.length}}条属性信息</span>
@@ -92,7 +112,7 @@
             <div class="build_content">
               <el-table :data="relationTableData" border stripe style="width: 100%" height="100%">
                 <el-table-column prop="relationName" label="关系名"></el-table-column>
-                <el-table-column prop="parentName" label="所属概念"></el-table-column>
+                <!-- <el-table-column prop="parentName" label="所属概念"></el-table-column> -->
                 <el-table-column prop="relationOtherName" label="关系别名"></el-table-column>
                 <el-table-column prop="objectName" label="对象概念" min-width="150">
                   <!-- 多个tag -->
@@ -122,9 +142,9 @@
                   <el-form-item label="关系名">
                     <el-input v-model="relationform.relationName"></el-input>
                   </el-form-item>
-                  <el-form-item label="所属概念">
+                  <!-- <el-form-item label="所属概念">
                     <el-input v-model="relationform.parentName"></el-input>
-                  </el-form-item>
+                  </el-form-item>-->
                   <el-form-item label="关系别名">
                     <el-input v-model="relationform.relationOtherName"></el-input>
                   </el-form-item>
@@ -186,12 +206,27 @@ export default {
             {
               pid: 999,
               id: 1,
-              label: "属性信息"
+              label: "作者"
             },
             {
               pid: 999,
               id: 2,
-              label: "关系信息"
+              label: "机构"
+            },
+            {
+              pid: 999,
+              id: 3,
+              label: "主题"
+            },
+            {
+              pid: 999,
+              id: 4,
+              label: "文献"
+            },
+            {
+              pid: 999,
+              id: 5,
+              label: "出版物"
             }
           ]
         }
@@ -200,9 +235,9 @@ export default {
         children: "children",
         label: "label"
       },
-      msg: "概念1",
+      msg: "概念名",
       describe: "新概念",
-      activeName: "first",
+      activeName: "属性信息",
       tableData: [],
       formAttributeshow: false,
       form: {
@@ -220,6 +255,51 @@ export default {
     };
   },
   methods: {
+    editdescribe() {
+      this.$confirm("是否确定修改描述?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "修改成功!"
+          });
+          // tudo?
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消修改"
+          });
+          // tudo?
+        });
+    },
+    modifyconcept(data) {
+      this.$prompt(`请输入节点名称(${data.label})`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      })
+        .then(({ value }) => {
+          this.$message({
+            type: "success",
+            message: "修改成功"
+          });
+          this.msg = value;
+          data.label = value;
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消修改"
+          });
+        });
+    },
+    handleNodeClick(data) {
+      const { label } = data;
+      this.msg = label;
+    },
     deleteship(e) {
       this.$confirm("是否确定删除?", "提示", {
         confirmButtonText: "确定",
@@ -319,7 +399,10 @@ export default {
     },
     // 删除子节点
     remove(data) {
-      data.children.pop();
+      const index = this.data[0].children.findIndex(function(item) {
+        return item.id == data.id;
+      });
+      this.data[0].children.splice(index, 1);
     },
     async handleClick(e) {
       this.formAttributeshow = true;
@@ -481,6 +564,30 @@ export default {
     background: #d1d4d1;
     margin-right: 10px;
     vertical-align: middle;
+  }
+}
+</style>
+<style lang="less">
+.concept_name {
+  display: flex;
+  > span {
+    width: 80px;
+  }
+  .el-input {
+    height: 30px;
+    width: 150px;
+    input {
+      height: 24px !important;
+      line-height: 24px;
+    }
+  }
+  .el-button.is-circle {
+    padding: 4px;
+  }
+}
+.bulid_lift {
+  .el-button.is-circle {
+    padding: 3px;
   }
 }
 </style>

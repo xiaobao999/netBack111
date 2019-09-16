@@ -15,11 +15,9 @@
           <li>创建人:{{item.atlasfounder}}</li>
           <li>创建时间：{{item.atlastime}}</li>
           <li>所属领域：{{item.atlasfield}}</li>
-          <!-- todo visibility改一下 -->
         </ul>
         <hr />
         <div>
-          <!-- todo: 增加删除确认弹框 -->
           <el-button size="mini" style="float:left" @click="delete_tp(i)">删除</el-button>
           <div style="display:inline-block;float: right;">
             <el-button size="mini" @click="eject('edit',i)">编辑</el-button>
@@ -37,7 +35,7 @@
           <el-input v-model="form.atlasfounder" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="创建时间：" :label-width="formLabelWidth">
-          <el-input v-model="form.atlastime" autocomplete="off"></el-input>
+          <el-date-picker v-model="form.atlastime" type="datetime" placeholder="请选择时间"></el-date-picker>
         </el-form-item>
         <el-form-item label="所属领域：" :label-width="formLabelWidth">
           <el-input v-model="form.atlasfield" autocomplete="off"></el-input>
@@ -126,6 +124,7 @@ export default {
               message: "删除成功!"
             });
           }
+          this.loaddata();
         })
         .catch(() => {
           this.$message({
@@ -171,10 +170,10 @@ export default {
       await this.loaddata();
       this.dialogFormVisible = false;
     },
-    addatlas() {
+    async addatlas() {
       var arr = new Array(1);
       arr[0] = this.form;
-      var resp = this.$http
+      var resp = await this.$http
         .post(
           "netment",
           {
@@ -191,8 +190,9 @@ export default {
           arr[0].id = response.data.id;
         });
       // this.form.id = this.atlaslist.length + 1;
-      this.loaddata();
+
       this.dialogFormVisible = false;
+      this.loaddata();
     },
     cancel() {
       let n = this.atlaslist.findIndex(item => item.id == this.form.id);
@@ -206,6 +206,9 @@ export default {
 .search {
   width: 300px;
   display: flex;
+  .el-button {
+    margin-left: 10px;
+  }
 }
 .atlas {
   margin-top: 30px;
