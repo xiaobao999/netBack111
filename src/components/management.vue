@@ -17,10 +17,22 @@
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="id" label="ID" width="100"></el-table-column>
         <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="author" label="作者" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="author" label="作者">
+          <template slot-scope="scope">
+            <el-tag v-for="(item,i) in scope.row.author" :key="i">{{item[0]}}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="pubyear" label="年份" width="100" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="affiliation" label="机构" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="topic" label="关键词" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="affiliation" label="机构">
+          <template slot-scope="scope">
+            <el-tag v-for="(item,i) in scope.row.affiliation" :key="i">{{item[0]}}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="topic" label="关键词">
+          <template slot-scope="scope">
+            <el-tag v-for="(item,i) in scope.row.topic" :key="i">{{item[0]}}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column fixed="right" label="操作" width="90">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
@@ -48,7 +60,25 @@
                 <el-input v-model="form.title"></el-input>
               </el-form-item>
               <el-form-item label="作者">
-                <el-input v-model="form.author"></el-input>
+                <div class="tagshow">
+                  <el-tag
+                    :key="tag"
+                    v-for="tag in form.author"
+                    closable
+                    :disable-transitions="false"
+                    @close="handleClose(tag)"
+                  >{{tag}}</el-tag>
+                  <el-input
+                    class="input-new-tag"
+                    v-if="inputVisible"
+                    v-model="inputValue"
+                    ref="saveTagInput"
+                    size="small"
+                    @keyup.enter.native="handleInputConfirm"
+                    @blur="handleInputConfirm"
+                  ></el-input>
+                  <el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>
+                </div>
               </el-form-item>
               <el-form-item label="年份">
                 <el-input v-model="form.pubyear"></el-input>
@@ -80,21 +110,43 @@ export default {
       form: {
         id: "",
         title: "",
-        author: "",
+        author: [],
         pubyear: "",
         affiliation: [],
         topic: []
-      }
+      },
+      inputValue: "",
+      inputVisible: false
     };
   },
   created() {
     this.getdata();
   },
   methods: {
+    handleClose(tag) {
+      this.dynamicTags.splice(this.author.indexOf(tag), 1);
+    },
+
+    showInput() {
+      this.inputVisible = true;
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.dynamicTags.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = "";
+    },
     async getdata() {
       const res = await this.$http.get("management");
       // console.log(res);
       const { data } = res;
+      
       this.tableData = data;
     },
     async handleClick(e) {
