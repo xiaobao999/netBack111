@@ -35,7 +35,13 @@
           <el-input v-model="form.atlasfounder" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="创建时间：" :label-width="formLabelWidth">
-          <el-date-picker v-model="form.atlastime" type="datetime" placeholder="请选择时间"></el-date-picker>
+          <el-date-picker
+            v-model="form.atlastime"
+            type="datetime"
+            placeholder="请选择时间"
+            format="yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒"
+            value-format="yyyy-MM-dd HH:mm:ss"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item label="所属领域：" :label-width="formLabelWidth">
           <el-input v-model="form.atlasfield" autocomplete="off"></el-input>
@@ -257,5 +263,9 @@ li {
 }
 .atlas_list li {
   margin-bottom: 5px;
+}
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
 }
 </style>

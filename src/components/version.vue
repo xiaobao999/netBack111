@@ -40,7 +40,13 @@
               <el-input v-model="form.name"></el-input>
             </el-form-item>
             <el-form-item label="时间">
-              <el-date-picker v-model="form.date" type="datetime" placeholder="请选择时间"></el-date-picker>
+              <el-date-picker
+                v-model="form.date"
+                type="datetime"
+                placeholder="请选择时间"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
             </el-form-item>
             <el-form-item label="创建人">
               <el-input v-model="form.person"></el-input>
@@ -87,6 +93,10 @@
     height: 100%;
     box-shadow: none;
   }
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    width: 100%;
+  }
 }
 </style>
 <script>
@@ -118,6 +128,7 @@ export default {
       const res = await this.$http.get(`version/${id}`);
       const { data } = res;
       this.form = data;
+      console.log(this.form.date);
     },
     close() {
       this.formshow = false;

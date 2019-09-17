@@ -112,7 +112,7 @@ export default {
     },
     async getdata() {
       const res = await this.$http.get(`progress`);
-      this.tableData = res.data;
+      this.tableData = res.data.reverse();
       console.log(res.data);
     },
     openanimation() {},
