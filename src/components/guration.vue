@@ -92,12 +92,46 @@ let edges = [
 let nodes = [
   {
     name: "导入数据",
+    x: 550,
+    y: 100,
     pid: 0
   },
   {
     name: "导出数据",
+    x: 550,
+    y: 500,
     pid: 0
   }
+  // {
+  //   name: "数据清洗1",
+  //   x: 550,
+  //   y: 250,
+  //   pid: 1
+  // },
+  // {
+  //   name: "数据清洗2",
+  //   x: 350,
+  //   y: 250,
+  //   pid: 1
+  // },
+  // {
+  //   name: "数据清洗3",
+  //   x: 750,
+  //   y: 250,
+  //   pid: 1
+  // },
+  // {
+  //   name: "数据加工1",
+  //   x: 450,
+  //   y: 400,
+  //   pid: 2
+  // },
+  // {
+  //   name: "数据加工2",
+  //   x: 650,
+  //   y: 400,
+  //   pid: 2
+  // }
 ];
 
 let option = {
@@ -107,7 +141,7 @@ let option = {
   series: [
     {
       type: "graph",
-      layout: "force",
+      layout: "none",
       coordinateSystem: null,
       symbol:
         "path://M19.300,3.300 L253.300,3.300 C262.136,3.300 269.300,10.463 269.300,19.300 L269.300,21.300 C269.300,30.137 262.136,37.300 253.300,37.300 L19.300,37.300 C10.463,37.300 3.300,30.137 3.300,21.300 L3.300,19.300 C3.300,10.463 10.463,3.300 19.300,3.300 Z",
@@ -145,17 +179,19 @@ let option = {
           }
         }
       },
-      force: {
-        repulsion: 5000,
-        edgeLength: [5, 10]
-        //layoutAnimation: true
-      },
+      // force: {
+      //   repulsion: 5000,
+      //   edgeLength: [5, 10]
+      //   //layoutAnimation: true
+      // },
       nodes: nodes,
       edges: edges
       //animation: true
     }
   ]
 };
+let arr1 = [];
+let arr2 = [];
 export default {
   watch: {
     filterText(val) {
@@ -258,7 +294,7 @@ export default {
         }
       }
       if (behavior) {
-        nodes = [...nodes, { name: data.label, value: 1 }];
+        this.getnodes(data);
       }
       edgesarr.push(data);
       this.getedges(edgesarr);
@@ -269,7 +305,17 @@ export default {
     },
     remove(data) {
       const lablenode = data.label;
-
+      if (data.pid == 1) {
+        const arrindex = arr1.findIndex(item => {
+          return item.name == data.label;
+        });
+        arr1.splice(arrindex, 1);
+      } else if (data.pid == 2) {
+        const arrindex = arr2.findIndex(item => {
+          return item.name == data.label;
+        });
+        arr2.splice(arrindex, 1);
+      }
       const lablestate = nodes.findIndex(item => {
         return item.name == lablenode;
       });
@@ -305,11 +351,69 @@ export default {
         this.dialogTableVisible = true;
       });
     },
-    getedges(edgesarr) {
-      //      {
-      //   target: "导入数据",
-      //   source: "导出数据"
+    getnodes(e) {
+      if (e.pid == 1) {
+        arr1.push({ name: e.label, pia: e.pid });
+        if (arr1.length == 1) {
+          arr1[0].x = 550;
+          arr1[0].y = 300;
+        } else if (arr1.length == 2) {
+          arr1[0].x = 450;
+          arr1[0].y = 300;
+          arr1[1].x = 650;
+          arr1[1].y = 300;
+        } else if (arr1.length == 3) {
+          arr1[0].x = 450;
+          arr1[0].y = 300;
+          arr1[1].x = 650;
+          arr1[1].y = 300;
+          arr1[2].x = 550;
+          arr1[2].y = 300;
+        }
+        console.log(arr1);
+      }
+      if (e.pid == 2) {
+        arr2.push({ name: e.label, pia: e.pid });
+        if (arr2.length == 1) {
+          arr2[0].x = 550;
+          arr2[0].y = 400;
+        } else if (arr2.length == 2) {
+          arr2[0].x = 450;
+          arr2[0].y = 400;
+          arr2[1].x = 650;
+          arr2[1].y = 400;
+        }
+      }
+      if (nodes.length == 2) {
+        nodes = [...nodes, { name: e.label, x: 550, y: 300, pid: e.pid }];
+      } else {
+        nodes = [
+          {
+            name: "导入数据",
+            x: 550,
+            y: 100,
+            pid: 0
+          },
+          {
+            name: "导出数据",
+            x: 550,
+            y: 500,
+            pid: 0
+          },
+          ...arr1,
+          ...arr2
+        ];
+      }
+
+      // else {
+      //   if (e.pid == nodes[nodes.length - 1].pid) {
+      //     nodes[nodes.length - 1].x = 450;
+      //     nodes = [...nodes, { name: e.label, x: 650, y: 300, pid: e.pid }];
+      //   }
       // }
+      // nodes = [...nodes, { name: data.label, x: 550, y: 300 }];
+    },
+    getedges(edgesarr) {
       // 1.先通过pid把数组分成两个
       if (edgesarr.length == 0) {
         return (edges = [

@@ -25,11 +25,7 @@
           active-text-color="#ee6e15"
           :collapse="isCollapse"
         >
-          <div class="Tips">
-            <el-switch v-model="change" @change="switchisCollapse"></el-switch>
-            <b>{{!change?'收起':'展开'}}</b>
-          </div>
-          <el-menu-item index="netment">
+          <el-menu-item index="/netment">
             <i class="el-icon-menu"></i>
             <span slot="title">文献网络管理</span>
           </el-menu-item>
@@ -39,9 +35,9 @@
               <span>数据模型管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="building">模型构建</el-menu-item>
-              <el-menu-item index="version">版本管理</el-menu-item>
-              <el-menu-item index="visualization">模型可视化</el-menu-item>
+              <el-menu-item index="/building">模型构建</el-menu-item>
+              <el-menu-item index="/version">版本管理</el-menu-item>
+              <el-menu-item index="/visualization">模型可视化</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
@@ -50,8 +46,8 @@
               <span>文献数据管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="dataimport">数据导入</el-menu-item>
-              <el-menu-item index="management">源数据管理</el-menu-item>
+              <el-menu-item index="/dataimport">数据导入</el-menu-item>
+              <el-menu-item index="/management">源数据管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="4">
@@ -60,11 +56,12 @@
               <span>工作流管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="guration">流程配置</el-menu-item>
-              <el-menu-item index="progress">进度查看</el-menu-item>
+              <el-menu-item index="/guration">流程配置</el-menu-item>
+              <el-menu-item index="/progress">进度查看</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
+        <div class="switchbtn el-icon-caret-left"></div>
       </div>
       <el-main class="subject">
         <router-view></router-view>
@@ -170,12 +167,21 @@ export default {
   }
   .left_nav {
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
+    position: relative;
     .el-menu {
       height: 100%;
       overflow: hidden;
     }
-    // 开关样式
+    // 开关样式]
+    .switchbtn {
+      width: 13px;
+      height: 15%;
+      position: absolute;
+      top: 42%;
+      right: -12px;
+      background-color: #ee6e15;
+    }
   }
 }
 .Tips {
@@ -196,5 +202,4 @@ export default {
   border-color: #409eff;
   background: #006586 !important;
 }
-
 </style>

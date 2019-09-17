@@ -17,7 +17,13 @@
             <el-button size="small" type="primary">上传文件</el-button>
           </el-upload>
           <el-form-item label="导入时间">
-            <el-input v-model="form.time"></el-input>
+            <el-date-picker
+              v-model="form.time"
+              type="datetime"
+              placeholder="请选择时间"
+              format="yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒"
+              value-format="yyyy-MM-dd HH:mm:ss"
+            ></el-date-picker>
           </el-form-item>
           <el-form-item label="操作员">
             <el-input v-model="form.name"></el-input>
@@ -36,13 +42,13 @@
       </el-tab-pane>
       <el-tab-pane label="数据库导入">
         <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="表名">
+          <el-form-item label="时间">
             <el-input v-model="form.time"></el-input>
           </el-form-item>
-          <el-form-item label="数据库类型">
+          <el-form-item label="操作员">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="连接字符串">
+          <el-form-item label="任务领域">
             <el-input v-model="form.areas"></el-input>
           </el-form-item>
           <el-form-item label="备注信息">
@@ -53,6 +59,14 @@
             <el-button @click="close">取消</el-button>
           </el-form-item>
         </el-form>
+      </el-tab-pane>
+      <el-tab-pane label="操作记录">
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column prop="time" label="导入时间"></el-table-column>
+          <el-table-column prop="name" label="操作员"></el-table-column>
+          <el-table-column prop="areas" label="任务领域"></el-table-column>
+          <el-table-column prop="information" label="备注信息"></el-table-column>
+        </el-table>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -68,6 +82,10 @@
   .el-form-item {
     margin-bottom: 30px;
   }
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    width: 100%;
+  }
 }
 </style>
 <script>
@@ -80,7 +98,15 @@ export default {
         areas: "",
         information: ""
       },
-      fileList: []
+      fileList: [],
+      tableData: [
+        {
+          time: "11",
+          name: "11",
+          areas: "11",
+          information: "11"
+        }
+      ]
     };
   },
   methods: {

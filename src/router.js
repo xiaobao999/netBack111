@@ -32,9 +32,9 @@ const router = new Router({
     children: [{
       path: '/netment',
       name: 'netment',
-      component: Netment
+      component: Netment,
     }, {
-      path: '/datement',
+      path: '/datement/:id',
       name: 'datement',
       component: Datement
     }, {

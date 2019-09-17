@@ -21,7 +21,7 @@
           <el-button size="mini" style="float:left" @click="delete_tp(i)">删除</el-button>
           <div style="display:inline-block;float: right;">
             <el-button size="mini" @click="eject('edit',i)">编辑</el-button>
-            <el-button size="mini" type="primary" @click="datement()">图谱管理</el-button>
+            <el-button size="mini" type="primary" @click="datement(item)">图谱管理</el-button>
           </div>
         </div>
       </div>
@@ -152,9 +152,9 @@ export default {
         this.form = {};
       }
     },
-    datement() {
+    datement(e) {
       this.$router.push({
-        name: "datement"
+        path: "datement/" + e.id
       });
     },
     async editatlas() {
