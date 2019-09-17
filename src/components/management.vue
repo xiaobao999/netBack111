@@ -19,18 +19,18 @@
         <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
         <el-table-column prop="author" label="作者">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.author" :key="i">{{item[0]}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.author" :key="i">{{item.name}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="pubyear" label="年份" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column prop="affiliation" label="机构">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.affiliation" :key="i">{{item[0]}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.affiliation" :key="i">{{item.mechanism}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="topic" label="关键词">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.topic" :key="i">{{item[0]}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.topic" :key="i">{{item.keyword}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="90">
@@ -67,7 +67,7 @@
                     closable
                     :disable-transitions="false"
                     @close="handleClose(tag)"
-                  >{{tag}}</el-tag>
+                  >{{tag.name}}</el-tag>
                   <el-input
                     class="input-new-tag"
                     v-if="inputVisible"
@@ -84,10 +84,10 @@
                 <el-input v-model="form.pubyear"></el-input>
               </el-form-item>
               <el-form-item label="机构">
-                <el-input v-model="form.affiliation"></el-input>
+                <!-- <el-input v-model="form.affiliation"></el-input> -->
               </el-form-item>
               <el-form-item label="关键词">
-                <el-input v-model="form.topic"></el-input>
+                <!-- <el-input v-model="form.topic"></el-input> -->
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -137,7 +137,7 @@ export default {
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
-        this.dynamicTags.push(inputValue);
+        this.form.author.push({ id: 555, name: this.inputValue });
       }
       this.inputVisible = false;
       this.inputValue = "";
@@ -146,7 +146,7 @@ export default {
       const res = await this.$http.get("management");
       // console.log(res);
       const { data } = res;
-      
+      console.table(data, 999999);
       this.tableData = data;
     },
     async handleClick(e) {
@@ -155,6 +155,7 @@ export default {
       const res = await this.$http.get(`management/${id}`);
       const { data } = res;
       this.form = data;
+      //tudo抽组件最好
     },
     async onSubmit() {
       this.formshow = false;
