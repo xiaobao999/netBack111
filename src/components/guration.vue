@@ -347,7 +347,9 @@ export default {
     drawLine() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption(option);
-      myChart.on("click", () => {
+      myChart.on("click", e => {
+        //点击的是线不做弹窗
+        if (e.dataType == "edge") return;
         this.dialogTableVisible = true;
       });
     },
