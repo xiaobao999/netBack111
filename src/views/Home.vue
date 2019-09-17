@@ -16,7 +16,13 @@
       </el-menu>
     </div>
     <div class="main">
-      <div class="left_nav" :class="isCollapse?'Retract':'open'" v-if="leftbar">
+      <div
+        class="left_nav"
+        :class="isCollapse?'Retract':'open'"
+        @open="handleOpen"
+        @close="handleClose"
+        :collapse="isCollapse"
+      >
         <el-menu
           :router="true"
           :default-active="defaultnav"
@@ -61,7 +67,10 @@
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
-        <div class="switchbtn el-icon-caret-left"></div>
+        <div @click="switchit" class="switchbtn">
+          <i class="el-icon-caret-left" v-if="!isCollapse"></i>
+          <i class="el-icon-caret-right" v-if="isCollapse"></i>
+        </div>
       </div>
       <el-main class="subject">
         <router-view></router-view>
@@ -79,8 +88,7 @@ export default {
       activeIndex2: "1",
       defaultnav: "netment",
       isCollapse: false,
-      change: false,
-      leftbar: true
+      change: false
     };
   },
   computed: {
@@ -100,8 +108,8 @@ export default {
       const URL = this.$route.path.split("/");
       this.defaultnav = URL[1];
     },
-    switchisCollapse() {
-      this.isCollapse = this.change;
+    switchit() {
+      this.isCollapse = !this.isCollapse;
     },
     logout() {
       this.$confirm("确定退出登录?", "提示", {
@@ -154,6 +162,7 @@ export default {
       position: absolute;
       left: 10px;
       top: 8px;
+      outline: none;
     }
   }
   .Retract {
@@ -175,12 +184,14 @@ export default {
     }
     // 开关样式]
     .switchbtn {
-      width: 13px;
-      height: 15%;
-      position: absolute;
-      top: 42%;
-      right: -12px;
-      background-color: #ee6e15;
+      i {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        color: #fff;
+        transform: translateY(-50%);
+        transform: scaleY(3);
+      }
     }
   }
 }
