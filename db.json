@@ -424,28 +424,12 @@
       "startup": false
     },
     {
-      "id": 4,
       "date": "52156321258",
-      "name": 52,
-      "state": "启动",
-      "mechanism": "北京大学",
-      "startup": true
-    },
-    {
-      "date": "52156321258",
-      "id": 10,
-      "mechanism": "北京大学",
-      "name": 10,
-      "startup": true,
-      "state": "启动"
-    },
-    {
-      "date": "52156321258",
-      "id": 11,
       "mechanism": "北京大学",
       "name": 0,
       "startup": true,
-      "state": "启动"
+      "state": "启动",
+      "id": 4
     }
   ],
   "progresslog": [
@@ -479,20 +463,6 @@
     }
   ],
   "building": [
-    {
-      "id": 1,
-      "name": "属性2",
-      "alias": "2号属性",
-      "type": "类型",
-      "company": "北京"
-    },
-    {
-      "id": 2,
-      "name": "属性3",
-      "alias": "2号属3",
-      "type": "类型",
-      "company": "北京"
-    },
     {
       "id": 3,
       "name": "属性4",
@@ -559,9 +529,16 @@
       "type": "数组型",
       "Ename": "",
       "othername": "",
-      "company": "456",
-      "alias": "456",
+      "company": "456213",
+      "alias": "456123",
       "id": 10
+    },
+    {
+      "name": "123",
+      "alias": "123",
+      "company": "123",
+      "type": "日期",
+      "id": 19
     }
   ],
   "super": {
@@ -590,15 +567,29 @@
       "relationType": "非单值"
     },
     {
-      "relationName": "456",
+      "relationName": "465",
       "parentName": "",
-      "relationOtherName": "456",
+      "relationOtherName": "564",
       "objectName": [
-        "456",
         "456"
       ],
       "relationType": "单值",
       "id": 3
+    },
+    {
+      "objectName": [
+        "4564",
+        "456",
+        "456",
+        "456",
+        "456",
+        "12"
+      ],
+      "parentName": "",
+      "relationName": "456",
+      "relationOtherName": "456",
+      "relationType": "单值",
+      "id": 4
     }
   ],
   "management": [

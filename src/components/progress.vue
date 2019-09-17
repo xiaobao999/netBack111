@@ -59,6 +59,30 @@ export default {
     this.getdata();
   },
   methods: {
+    deleteprogress(e) {
+      this.$confirm("是否确定删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+          //tudo返回提示信息
+          const id = e.id;
+          await this.$http.delete(`progress/${id}`);
+          this.getdata();
+        })
+        .catch(() => {
+          console.log(222222);
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    },
     customColorMethod(percentage) {
       if (percentage == 100) {
         return "#67c23a";

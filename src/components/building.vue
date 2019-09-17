@@ -348,9 +348,19 @@ export default {
     async onSubmitship() {
       let id = this.relationform.id;
       if (id == undefined) {
-        console.log(this.relationform);
-        this.relationform.id = this.relationTableData.length + 1;
-        await this.$http.post(`information`, this.relationform);
+        var arr = new Array(1);
+        arr[0] = this.form;
+        await this.$http
+          .post(`information`, {
+            objectName: this.relationform.objectName,
+            parentName: this.relationform.parentName,
+            relationName: this.relationform.relationName,
+            relationOtherName: this.relationform.relationOtherName,
+            relationType: this.relationform.relationType
+          })
+          .then(function(response) {
+            arr[0].id = response.data.id;
+          });
         this.getdata();
       } else {
         await this.$http.put(`information/${id}`, this.relationform);
@@ -414,8 +424,18 @@ export default {
     async onSubmit() {
       let id = this.form.id;
       if (id == undefined) {
-        this.form.id = this.tableData.length + 1;
-        await this.$http.post(`building`, this.form);
+        var arr = new Array(1);
+        arr[0] = this.form;
+        await this.$http
+          .post(`building`, {
+            name: this.form.name,
+            alias: this.form.alias,
+            company: this.form.company,
+            type: this.form.type
+          })
+          .then(function(response) {
+            arr[0].id = response.data.id;
+          });
         this.getdata();
       } else {
         await this.$http.put(`building/${id}`, this.form);

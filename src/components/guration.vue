@@ -147,11 +147,11 @@ let option = {
       },
       force: {
         repulsion: 5000,
-        edgeLength: [5, 10],
+        edgeLength: [5, 10]
         //layoutAnimation: true
       },
       nodes: nodes,
-      edges: edges,
+      edges: edges
       //animation: true
     }
   ]
@@ -224,16 +224,19 @@ export default {
   },
   methods: {
     async goprogress() {
-      let formdata = {
-        date: "52156321258",
-        id: 11,
-        mechanism: "北京大学",
-        name: 0,
-        startup: true,
-        state: "启动"
-      };
-      await this.$http.post(`progress`, formdata);
-
+      var arr = new Array(1);
+      arr[0] = this.form;
+      await this.$http
+        .post(`progress`, {
+          date: "52156321258",
+          mechanism: "北京大学",
+          name: 0,
+          startup: true,
+          state: "启动"
+        })
+        .then(function(response) {
+          arr[0].id = response.data.id;
+        });
       this.$router.push({
         name: "progress"
       });

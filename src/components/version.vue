@@ -147,10 +147,21 @@ export default {
     },
     async onSubmit() {
       this.formshow = false;
-      let id = this.form.id;
+      const id = this.form.id;
       if (id == undefined) {
-        this.form.id = this.tableData.length + 1;
-        await this.$http.post(`version`, this.form);
+        var arr = new Array(1);
+        arr[0] = this.form;
+        console.log(arr[0]);
+        await this.$http
+          .post(`version`, {
+            name: this.form.name,
+            date: this.form.date,
+            person: this.form.person,
+            explain: this.form.explain
+          })
+          .then(function(response) {
+            arr[0].id = response.data.id;
+          });
         this.getdata();
       } else {
         await this.$http.put(`version/${id}`, this.form);
