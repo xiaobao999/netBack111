@@ -2,10 +2,8 @@
   <div style="height:100%">
     <div class="nav">
       <el-menu
-        :default-active="activeIndex2"
         class="nav_top"
         mode="horizontal"
-        @select="handleSelect"
         background-color="#017398"
         text-color="#fff"
         active-text-color="#ee6e15"
