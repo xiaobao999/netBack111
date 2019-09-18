@@ -19,18 +19,18 @@
         <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
         <el-table-column prop="author" label="作者">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.author" :key="i">{{item.name}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.author" :key="i">{{item[0]}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="pubyear" label="年份" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column prop="affiliation" label="机构">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.affiliation" :key="i">{{item.mechanism}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.affiliation" :key="i">{{item[0]}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="topic" label="关键词">
           <template slot-scope="scope">
-            <el-tag v-for="(item,i) in scope.row.topic" :key="i">{{item.keyword}}</el-tag>
+            <el-tag v-for="(item,i) in scope.row.topic" :key="i">{{item[0]}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="90">
@@ -40,7 +40,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="form" v-show="formshow">
+      <div class="form" v-if="formshow">
         <div class="tittle">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -60,33 +60,17 @@
                 <el-input v-model="form.title"></el-input>
               </el-form-item>
               <el-form-item label="作者">
-                <div class="tagshow">
-                  <el-tag
-                    :key="tag"
-                    v-for="tag in form.author"
-                    closable
-                    :disable-transitions="false"
-                    @close="handleClose(tag)"
-                  >{{tag.name}}</el-tag>
-                  <el-input
-                    class="input-new-tag"
-                    v-if="inputVisible"
-                    v-model="inputValue"
-                    ref="saveTagInput"
-                    size="small"
-                    @keyup.enter.native="handleInputConfirm"
-                    @blur="handleInputConfirm"
-                  ></el-input>
-                  <el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>
-                </div>
+                <form-tag :list="form.author" ref="author"></form-tag>
               </el-form-item>
               <el-form-item label="年份">
                 <el-input v-model="form.pubyear"></el-input>
               </el-form-item>
               <el-form-item label="机构">
+                <form-tag :list="form.affiliation" ref="affiliation"></form-tag>
                 <!-- <el-input v-model="form.affiliation"></el-input> -->
               </el-form-item>
               <el-form-item label="关键词">
+                <form-tag :list="form.topic" ref="topic"></form-tag>
                 <!-- <el-input v-model="form.topic"></el-input> -->
               </el-form-item>
               <el-form-item>
@@ -101,7 +85,9 @@
   </div>
 </template>
 <script>
+import FormTag from "./formtag";
 export default {
+  components: { FormTag },
   data() {
     return {
       input: "",
@@ -116,51 +102,44 @@ export default {
         topic: []
       },
       inputValue: "",
-      inputVisible: false
+      inputVisible: false,
+      timer: ""
     };
   },
   created() {
     this.getdata();
   },
   methods: {
-    handleClose(tag) {
-      this.dynamicTags.splice(this.author.indexOf(tag), 1);
-    },
-
-    showInput() {
-      this.inputVisible = true;
-      this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
-    },
-
-    handleInputConfirm() {
-      let inputValue = this.inputValue;
-      if (inputValue) {
-        this.form.author.push({ id: 555, name: this.inputValue });
-      }
-      this.inputVisible = false;
-      this.inputValue = "";
-    },
     async getdata() {
       const res = await this.$http.get("management");
       // console.log(res);
       const { data } = res;
-      console.table(data, 999999);
+      //console.table(data, 999999);
       this.tableData = data;
     },
     async handleClick(e) {
-      this.formshow = true;
       const id = e.id;
       const res = await this.$http.get(`management/${id}`);
       const { data } = res;
       this.form = data;
+      this.formshow = true;
       //tudo抽组件最好
     },
     async onSubmit() {
-      this.formshow = false;
       let id = this.form.id;
-      await this.$http.put(`management/${id}`, this.form);
+      let author = this.$refs.author.list,
+        affiliation = this.$refs.affiliation.list,
+        topic = this.$refs.topic.list;
+      await this.$http.put(`management/${id}`, {
+        id: this.form.id,
+        title: this.form.title,
+        author: author,
+        pubyear: this.form.pubyear,
+        affiliation: affiliation,
+        topic: topic
+      });
+      // console.log(author, affiliation, topic);
+      this.formshow = false;
       this.getdata();
     },
     deleteRow(e) {
