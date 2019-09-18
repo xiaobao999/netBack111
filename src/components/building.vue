@@ -296,9 +296,20 @@ export default {
           });
         });
     },
-    handleNodeClick(data) {
+    // 点击左侧树事件
+    async handleNodeClick(data) {
+      //tudo接口查询（现在是假的，需做查询功能）
       const { label } = data;
       this.msg = label;
+      const id = data.id;
+      if (id == 999) {
+        this.getdata();
+      } else {
+        const res1 = await this.$http.get("building/" + id);
+        const res2 = await this.$http.get("information/" + id);
+        this.tableData = [res1.data];
+        this.relationTableData = [res2.data];
+      }
     },
     deleteship(e) {
       this.$confirm("是否确定删除?", "提示", {

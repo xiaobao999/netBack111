@@ -11,6 +11,7 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
+        height="100%"
         border
         @selection-change="handleSelectionChange"
       >
@@ -82,6 +83,16 @@
           </el-card>
         </div>
       </div>
+      <!-- 分页 -->
+      <!-- <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage4"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="Pagingtotal"
+      ></el-pagination>-->
     </div>
   </div>
 </template>
@@ -104,18 +115,27 @@ export default {
       },
       inputValue: "",
       inputVisible: false,
-      timer: ""
+      timer: "",
+      currentPage4: 1,
+      Pagingtotal: 1
     };
   },
   created() {
     this.getdata();
   },
   methods: {
+    // 分页相关
+    // handleSizeChange(val) {
+    //   console.log(`每页 ${val} 条`);
+    // },
+    // handleCurrentChange(val) {
+    //   console.log(`当前页: ${val}`);
+    // },
     async getdata() {
       const res = await this.$http.get("management");
       // console.log(res);
       const { data } = res;
-      //console.table(data, 999999);
+      this.Pagingtotal = data.length;
       this.tableData = data;
     },
     async handleClick(e) {
@@ -217,10 +237,15 @@ export default {
   }
 }
 .management_main {
+  position: relative;
   width: 100%;
   height: 100%;
   margin-top: 20px;
   display: flex;
+  .el-pagination {
+    position: absolute;
+    bottom: 0;
+  }
   .form {
     flex: 1.5;
     min-width: 200px;
@@ -230,12 +255,15 @@ export default {
       height: 100%;
       .el-card__body {
         height: 100%;
+        overflow: auto;
       }
     }
     .el-card {
       box-shadow: none;
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
   .el-table {

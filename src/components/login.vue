@@ -31,7 +31,7 @@
 </template>
 <script>
 import md5 from "js-md5";
-import { mapMutations, mapState, mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {

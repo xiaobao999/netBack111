@@ -80,7 +80,7 @@
   </div>
 </template>
 <script>
-import loginVue from "../components/login.vue";
+// import loginVue from "../components/login.vue";
 import { mapState } from "vuex";
 export default {
   data() {
@@ -107,7 +107,6 @@ export default {
     handleClose() {},
     geturl() {
       const URL = this.$route.path;
-      console.log(URL);
       this.defaultnav = URL;
     },
     switchit() {

@@ -9,7 +9,7 @@
             <div :class="scope.row.startup?'dynamic':''">
               <el-progress
                 :percentage="scope.row.name"
-                :stroke-width="16"
+                :stroke-width="15"
                 :text-inside="true"
                 :color="customColorMethod"
               ></el-progress>
@@ -76,7 +76,6 @@ export default {
           this.getdata();
         })
         .catch(() => {
-          console.log(222222);
           this.$message({
             type: "info",
             message: "已取消删除"

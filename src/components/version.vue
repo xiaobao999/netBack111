@@ -128,7 +128,6 @@ export default {
       const res = await this.$http.get(`version/${id}`);
       const { data } = res;
       this.form = data;
-      console.log(this.form.date);
     },
     close() {
       this.formshow = false;
@@ -162,7 +161,6 @@ export default {
       if (id == undefined) {
         var arr = new Array(1);
         arr[0] = this.form;
-        console.log(arr[0]);
         await this.$http
           .post(`version`, {
             name: this.form.name,
