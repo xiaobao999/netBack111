@@ -86,8 +86,8 @@ export default {
   }
 }
 img {
-  margin: 5px 20px;
-  height: 45px;
+  margin: 10px 20px;
+  height: 35px;
 }
 .login-wrap {
   //background: #324152;
