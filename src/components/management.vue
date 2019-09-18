@@ -60,18 +60,19 @@
                 <el-input v-model="form.title"></el-input>
               </el-form-item>
               <el-form-item label="作者">
+                <!-- 扔一个组件减少变量 -->
                 <form-tag :list="form.author" ref="author"></form-tag>
               </el-form-item>
               <el-form-item label="年份">
                 <el-input v-model="form.pubyear"></el-input>
               </el-form-item>
               <el-form-item label="机构">
+                <!-- 扔一个组件减少变量 -->
                 <form-tag :list="form.affiliation" ref="affiliation"></form-tag>
-                <!-- <el-input v-model="form.affiliation"></el-input> -->
               </el-form-item>
               <el-form-item label="关键词">
+                <!-- 扔一个组件减少变量 -->
                 <form-tag :list="form.topic" ref="topic"></form-tag>
-                <!-- <el-input v-model="form.topic"></el-input> -->
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -127,6 +128,7 @@ export default {
     },
     async onSubmit() {
       let id = this.form.id;
+      // 获取组件里面的数据
       let author = this.$refs.author.list,
         affiliation = this.$refs.affiliation.list,
         topic = this.$refs.topic.list;

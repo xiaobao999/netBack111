@@ -2,7 +2,6 @@
   <div class="home">
     <div class="top_nav">
       <el-menu
-        :default-active="activeIndex2"
         class="nav_top"
         mode="horizontal"
         @select="handleSelect"
@@ -28,6 +27,8 @@
           :default-active="defaultnav"
           background-color="#006586"
           text-color="#fff"
+          @open="handleOpen"
+          @close="handleClose"
           active-text-color="#ee6e15"
           :collapse="isCollapse"
         >
@@ -86,7 +87,7 @@ export default {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      defaultnav: "netment",
+      defaultnav: "/netment",
       isCollapse: false,
       change: false
     };
@@ -105,8 +106,9 @@ export default {
     handleOpen() {},
     handleClose() {},
     geturl() {
-      const URL = this.$route.path.split("/");
-      this.defaultnav = URL[1];
+      const URL = this.$route.path;
+      console.log(URL);
+      this.defaultnav = URL;
     },
     switchit() {
       this.isCollapse = !this.isCollapse;

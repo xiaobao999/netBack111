@@ -20,7 +20,7 @@
             <!-- <el-button type="text" size="small">导出</el-button> -->
             <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
             <el-button type="text" size="small" @click="deleteRow(scope.row)">删除</el-button>
-            <el-button type="text" size="small" class>导出</el-button>
+            <el-button type="text" size="small" @click="saveOrder">导出</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -184,7 +184,8 @@ export default {
       // console.log(res);
       const { data } = res;
       this.tableData = data;
-    }
+    },
+    saveOrder() {}
   }
 };
 </script>
