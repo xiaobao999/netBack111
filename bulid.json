@@ -1,0 +1,74 @@
+{
+    "building": [
+        {
+            "name": "author",
+            "lable": "作者",
+            "attribute": [
+                {
+                    "id": 1
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "mechanism",
+            "lable": "机构",
+            "attribute": [
+                {
+                    "id": 1
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "publication",
+            "lable": "机构",
+            "attribute": [
+                {
+                    "id": 1
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "theme",
+            "lable": "机构",
+            "attribute": [
+                {
+                    "id": 1
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "literature",
+            "lable": "机构",
+            "attribute": [
+                {
+                    "id": 1
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

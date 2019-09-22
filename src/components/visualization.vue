@@ -120,6 +120,139 @@
 </style>
 
 <script>
+// echarts配置
+let categories = [
+  {
+    draggable: true,
+    name: "作者",
+    itemStyle: {
+      color: {
+        colorStops: [
+          {
+            offset: 0,
+            color: "#B1ACEE" // 0% 处的颜色
+          }
+        ]
+      },
+      borderColor: "#7D39C0",
+      borderWidth: "3"
+    }
+  },
+  {
+    draggable: true,
+    name: "出版物",
+    itemStyle: {
+      color: {
+        colorStops: [
+          {
+            offset: 0,
+            color: "#F4B886" // 0% 处的颜色
+          }
+        ]
+      },
+      borderColor: "#EA7503",
+      borderWidth: "3"
+    }
+  },
+  {
+    draggable: true,
+    name: "主题词",
+    itemStyle: {
+      color: {
+        colorStops: [
+          {
+            offset: 0,
+            color: "#81CB80" // 0% 处的颜色
+          }
+        ]
+      },
+      borderColor: "#009E2C",
+      borderWidth: "3"
+    }
+  },
+  {
+    draggable: true,
+    name: "机构",
+    itemStyle: {
+      color: {
+        colorStops: [
+          {
+            offset: 0,
+            color: "#99A2A7" // 0% 处的颜色
+          }
+        ]
+      },
+      borderColor: "#8A9392",
+      borderWidth: "3"
+    }
+  },
+  {
+    draggable: true,
+    name: "文献",
+    itemStyle: {
+      color: {
+        colorStops: [
+          {
+            offset: 0,
+            color: "#7FBACA" // 0% 处的颜色
+          }
+        ]
+      },
+      borderColor: "#007697",
+      borderWidth: "3"
+    }
+  }
+];
+let option = {
+  legend: {
+    show: true,
+    left: "50%",
+    selectedMode: true,
+    top: 0,
+    data: ["作者", "机构", "出版物", "文献", "主题词"]
+  },
+  tooltip: {},
+  series: [
+    {
+      force: {
+        repulsion: 1200
+      },
+      categories: categories,
+      type: "graph",
+      layout: "force",
+      symbolSize: 50,
+      roam: true, //开启缩放和平移***
+      label: {
+        position: "top",
+        color: "#666",
+        show: true,
+        textStyle: {
+          fontSize: 20
+        }
+      },
+      draggable: true,
+      edgeSymbol: ["circle", "arrow"],
+      edgeSymbolSize: [4, 10],
+      edgeLabel: {
+        normal: {
+          textStyle: {
+            fontSize: 25
+          }
+        }
+      },
+      data: [],
+      links: [],
+      focusNodeAdjacency: true,
+      lineStyle: {
+        normal: {
+          width: 0.5,
+          curveness: 0.3,
+          opacity: 0.7
+        }
+      }
+    }
+  ]
+};
 export default {
   data() {
     return {
@@ -498,292 +631,51 @@ export default {
     },
     handleClick() {},
     drawLine() {
-      let categories = [
-        {
-          draggable: true,
-          name: "作者",
-          itemStyle: {
-            color: {
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#B1ACEE" // 0% 处的颜色
-                }
-              ]
-            },
-            borderColor: "#7D39C0",
-            borderWidth: "3"
-          }
-        },
-        {
-          draggable: true,
-          name: "出版物",
-          x: 650,
-          y: 230,
-          itemStyle: {
-            color: {
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#F4B886" // 0% 处的颜色
-                }
-              ]
-            },
-            borderColor: "#EA7503",
-            borderWidth: "3"
-          }
-        },
-        {
-          draggable: true,
-          name: "主题词",
-          x: 570,
-          y: 370,
-          itemStyle: {
-            color: {
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#81CB80" // 0% 处的颜色
-                }
-              ]
-            },
-            borderColor: "#009E2C",
-            borderWidth: "3"
-          }
-        },
-        {
-          draggable: true,
-          name: "机构",
-          x: 440,
-          y: 400,
-          itemStyle: {
-            color: {
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#99A2A7" // 0% 处的颜色
-                }
-              ]
-            },
-            borderColor: "#8A9392",
-            borderWidth: "3"
-          }
-        },
-        {
-          draggable: true,
-          name: "文献",
-          x: 550,
-          y: 300,
-          itemStyle: {
-            color: {
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#7FBACA" // 0% 处的颜色
-                }
-              ]
-            },
-            borderColor: "#007697",
-            borderWidth: "3"
-          }
-        }
-      ];
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       // 绘制图表
-      let option = {
-        legend: {
-          show: true,
-          left: "50%",
-          selectedMode: true,
-          top: 0,
-          data: categories.map(function(a) {
-            return a.name;
-          })
+      option.series[0].data = [
+        {
+          category: 0,
+          name: "作者"
         },
-        tooltip: {},
-        series: [
-          {
-            force: {
-              repulsion: 1200
-            },
-            categories: categories,
-            type: "graph",
-            layout: "force",
-            symbolSize: 50,
-            roam: true, //开启缩放和平移***
-            label: {
-              position: "top",
-              color: "#666",
-              show: true,
-              textStyle: {
-                fontSize: 20
-              }
-            },
-            draggable: true,
-            edgeSymbol: ["circle", "arrow"],
-            edgeSymbolSize: [4, 10],
-            edgeLabel: {
-              normal: {
-                textStyle: {
-                  fontSize: 25
-                }
-              }
-            },
-            data: [
-              {
-                category: 0,
-                name: "作者",
-                value: 1,
-                itemStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#B1ACEE" // 0% 处的颜色
-                      }
-                    ]
-                  },
-                  borderColor: "#7D39C0",
-                  borderWidth: "3"
-                }
-              },
-              {
-                category: 1,
-                value: 2,
-                name: "出版物",
-                x: 650,
-                y: 230,
-                itemStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#F4B886" // 0% 处的颜色
-                      }
-                    ]
-                  },
-                  borderColor: "#EA7503",
-                  borderWidth: "3"
-                }
-              },
-              {
-                category: 2,
-                value: 3,
-                name: "主题词",
-                x: 570,
-                y: 370,
-                itemStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#81CB80" // 0% 处的颜色
-                      }
-                    ]
-                  },
-                  borderColor: "#009E2C",
-                  borderWidth: "3"
-                }
-              },
-              {
-                value: 4,
-                category: 3,
-                name: "机构",
-                x: 440,
-                y: 400,
-                itemStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#99A2A7" // 0% 处的颜色
-                      }
-                    ]
-                  },
-                  borderColor: "#8A9392",
-                  borderWidth: "3"
-                }
-              },
-              {
-                value: 5,
-                category: 4,
-                name: "文献",
-                x: 550,
-                y: 300,
-                itemStyle: {
-                  color: {
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "#7FBACA" // 0% 处的颜色
-                      }
-                    ]
-                  },
-                  borderColor: "#007697",
-                  borderWidth: "3"
-                }
-              }
-            ],
-            links: [
-              {
-                source: "文献",
-                target: "作者",
-                label: {
-                  show: true,
-                  formatter: "关系",
-                  textStyle: {
-                    fontSize: 18
-                  }
-                }
-              },
-              {
-                source: "文献",
-                target: "出版物",
-                label: {
-                  show: true,
-                  formatter: "关系",
-                  textStyle: {
-                    fontSize: 18
-                  }
-                }
-              },
-              {
-                source: "文献",
-                target: "主题词",
-                label: {
-                  show: true,
-                  formatter: "关系",
-                  textStyle: {
-                    fontSize: 18
-                  }
-                }
-              },
-              {
-                source: "文献",
-                target: "机构",
-                label: {
-                  show: true,
-                  formatter: "关系",
-                  textStyle: {
-                    fontSize: 18
-                  }
-                }
-              }
-            ],
-            focusNodeAdjacency: true,
-            lineStyle: {
-              normal: {
-                width: 0.5,
-                curveness: 0.3,
-                opacity: 0.7
-              }
-            }
-          }
-        ]
-      };
-      var timer;
+        {
+          category: 1,
+          name: "出版物"
+        },
+        {
+          category: 2,
+          name: "主题词"
+        },
+        {
+          category: 3,
+          name: "机构"
+        },
+        {
+          category: 4,
+          name: "文献"
+        }
+      ];
+      option.series[0].links = [
+        {
+          source: "文献",
+          target: "作者"
+        },
+        {
+          source: "文献",
+          target: "出版物"
+        },
+        {
+          source: "文献",
+          target: "主题词"
+        },
+        {
+          source: "文献",
+          target: "机构"
+        }
+      ];
       myChart.setOption(option);
+      var timer;
       myChart.on("click", () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
@@ -792,290 +684,45 @@ export default {
       });
       myChart.on("dblclick", () => {
         clearTimeout(timer);
-        let option1 = {
-          legend: {
-            show: true,
-            left: "50%",
-            selectedMode: true,
-            top: 0,
-            data: categories.map(function(a) {
-              return a.name;
-            })
+        option.series[0].data = [
+          {
+            category: 4,
+            name: "345"
           },
-          tooltip: {},
-          series: [
-            {
-              force: {
-                repulsion: 1200
-              },
-              categories: categories,
-              type: "graph",
-              layout: "force",
-              symbolSize: 50,
-              roam: false,
-              label: {
-                position: "top",
-                color: "#666",
-                show: true,
-                textStyle: {
-                  fontSize: 20
-                }
-              },
-              draggable: true,
-              edgeSymbol: ["circle", "arrow"],
-              edgeSymbolSize: [4, 10],
-              edgeLabel: {
-                normal: {
-                  textStyle: {
-                    fontSize: 25
-                  }
-                }
-              },
-              data: [
-                {
-                  category: 0,
-                  draggable: true,
-                  name: "作者3",
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#B1ACEE" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#7D39C0",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  category: 0,
-                  draggable: true,
-                  name: "作者2",
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#B1ACEE" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#7D39C0",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  category: 0,
-                  draggable: true,
-                  name: "作者1",
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#B1ACEE" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#7D39C0",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  category: 0,
-                  value: 1,
-                  draggable: true,
-                  name: "作者",
-                  x: 650,
-                  y: 230,
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#B1ACEE" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#7D39C0",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  category: 1,
-                  value: 2,
-                  draggable: true,
-                  name: "出版物",
-                  x: 650,
-                  y: 230,
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#F4B886" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#EA7503",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  category: 2,
-                  value: 3,
-                  draggable: true,
-                  name: "主题词",
-                  x: 570,
-                  y: 370,
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#81CB80" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#009E2C",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  value: 4,
-                  category: 3,
-                  draggable: true,
-                  name: "机构",
-                  x: 440,
-                  y: 400,
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#99A2A7" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#8A9392",
-                    borderWidth: "3"
-                  }
-                },
-                {
-                  value: 5,
-                  category: 4,
-                  draggable: true,
-                  name: "文献",
-                  x: 550,
-                  y: 300,
-                  itemStyle: {
-                    color: {
-                      colorStops: [
-                        {
-                          offset: 0,
-                          color: "#7FBACA" // 0% 处的颜色
-                        }
-                      ]
-                    },
-                    borderColor: "#007697",
-                    borderWidth: "3"
-                  }
-                }
-              ],
-              links: [
-                {
-                  source: "文献",
-                  target: "作者",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "文献",
-                  target: "出版物",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "文献",
-                  target: "主题词",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "文献",
-                  target: "机构",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "作者",
-                  target: "作者1",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "作者",
-                  target: "作者2",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                },
-                {
-                  source: "作者",
-                  target: "作者3",
-                  label: {
-                    show: true,
-                    formatter: "协同",
-                    textStyle: {
-                      fontSize: 18
-                    }
-                  }
-                }
-              ],
-              focusNodeAdjacency: true,
-              lineStyle: {
-                normal: {
-                  width: 0.5,
-                  curveness: 0.3,
-                  opacity: 0.7
-                }
-              }
-            }
-          ]
-        };
+          {
+            category: 4,
+            name: "234"
+          },
+          {
+            category: 4,
+            name: "123"
+          },
+          {
+            category: 4,
+            name: "文献"
+          }
+        ];
+        option.series[0].links = [
+          {
+            source: "文献",
+            target: "作者"
+          },
+          {
+            source: "文献",
+            target: "123"
+          },
+          {
+            source: "文献",
+            target: "234"
+          },
+          {
+            source: "文献",
+            target: "345"
+          }
+        ];
         myChart.clear();
-        myChart.setOption(option1);
+        myChart.setOption(option);
+        // console.log(e.data.name);
       });
       //todo: 判断是否为作者，出版物，主题词，机构，文献
       //是否需要把json里每个数据都加上一个type属性，然后可以做if判断和小球双击查询判断
